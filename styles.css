@@ -1,0 +1,455 @@
+/* Custom styles to complement Tailwind CSS */
+
+/* Import Barlow Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&display=swap');
+
+/* Base styles */
+html {
+  font-size: 18px; /* Ensure base font size is 18px (1.125rem) */
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Barlow', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  color: #333;
+}
+
+/* Increased line height for intro text */
+#intro .text-gray-700 {
+  line-height: 2;
+}
+
+/* Smooth scrolling for the entire page */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom transitions */
+a {
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Text links styling */
+a[href]:not(#sticky-nav a, #top-socials a, .company-arrow, #projects a,footer a, #blog a) {
+  color: #0000ff;
+  text-decoration: underline;
+  position: relative;
+  padding-right: 1.2em;
+}
+
+a[href]:not(#sticky-nav a, #top-socials a, .company-arrow, #projects a,footer a, #blog a)::after {
+  content: '→';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: transform 0.2s ease;
+}
+
+a[href]:not(#sticky-nav a, #top-socials a, .company-arrow, #projects a,footer a, #blog a):hover::after {
+  transform: translate(3px, -50%);
+}
+
+/* Dark mode link styling */
+body.dark-mode a[href]:not(#sticky-nav a, #top-socials a, #projects a,footer a, .company-arrow, #blog a) {
+  color: #60a5fa; /* Tailwind blue-400 */
+}
+
+/* Sticky Navigation Bar */
+#sticky-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  opacity: 0;
+  transform: translateY(-100%);
+  transition: all 0.3s ease;
+}
+
+#sticky-nav.visible {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+#sticky-nav .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row !important;
+}
+
+#sticky-nav .flex-row {
+  display: flex;
+  flex-direction: row !important;
+  align-items: center;
+}
+
+body.dark-mode #sticky-nav {
+  background-color: rgba(17, 24, 39, 0.8); /* Tailwind gray-900 with opacity */
+}
+
+/* Mobile responsive styles */
+@media (max-width: 640px) {
+  #sticky-nav .container {
+    padding: 0.5rem 1rem;
+  }
+  
+  #sticky-nav h1 {
+    font-size: 1rem;
+  }
+  
+  #sticky-nav .flex-row {
+    gap: 0.75rem;
+  }
+  
+  #sticky-nav svg {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+}
+
+/* Custom styling for profile picture */
+#profile-pic {
+  transition: transform 0.5s ease;
+}
+
+#profile-pic:hover {
+  transform: scale(1.05);
+}
+
+/* Subtle fade-in animation for page load */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+header, section {
+  animation: fadeIn 0.6s ease forwards;
+}
+
+section {
+  animation-delay: 0.1s;
+}
+
+/* Arrow styling for links */
+a[href] .text-gray-400 {
+  transition: transform 0.2s ease;
+}
+
+a:hover .text-gray-400 {
+  transform: translateX(3px);
+}
+
+/* Ensure content is readable on all devices */
+@media (max-width: 640px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  .flex:not(#sticky-nav .flex-row, #sticky-nav .container) {
+    flex-direction: column;
+  }
+  
+  .w-16, .w-20, .w-24 {
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+}
+
+/* Dark mode styles */
+body.dark-mode {
+  background-color: #111827; /* Tailwind gray-900 */
+  color: #f3f4f6; /* Tailwind gray-100 */
+}
+
+body.dark-mode .text-gray-400 {
+  color: #9ca3af; /* Tailwind gray-400 */
+}
+
+body.dark-mode .text-gray-500,
+body.dark-mode .text-gray-600,
+body.dark-mode .text-gray-700 {
+  color: #d1d5db; /* Tailwind gray-300 */
+}
+
+body.dark-mode .border-gray-100 {
+  border-color: #374151; /* Tailwind gray-700 */
+}
+
+body.dark-mode .bg-gray-100 {
+  background-color: #374151; /* Tailwind gray-700 */
+}
+
+body.dark-mode .hover\:text-blue-600:hover {
+  color: #93c5fd; /* Tailwind blue-300 */
+}
+
+/* Top bar with theme toggle and social icons */
+#top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 3rem;
+}
+
+/* Social icons */
+#top-socials {
+  display: flex;
+  flex-direction: row !important;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+}
+
+@media (max-width: 640px) {
+  #top-socials {
+    gap: 0.75rem;
+  }
+  
+  #top-socials svg {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+}
+
+/* Theme toggle segmented control styles */
+.theme-toggle-container {
+  background-color: #f3f4f6; /* Light gray background */
+  border: 1px solid #e5e7eb;
+  transform: scale(0.9);
+  border-radius: 0.375rem;
+}
+
+body.dark-mode .theme-toggle-container {
+  background-color: #1f2937; /* Dark gray background */
+  border-color: #374151;
+}
+
+.theme-btn {
+  color: #6b7280; /* Default icon color */
+  width: 24px;
+  height: 24px;
+}
+
+.theme-btn:hover {
+  color: #111827;
+}
+
+body.dark-mode .theme-btn:hover {
+  color: #f9fafb;
+}
+
+.theme-btn.active {
+  background-color: #fff;
+  color: #3b82f6; /* Blue for active state */
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+body.dark-mode .theme-btn.active {
+  background-color: #374151;
+  color: #60a5fa;
+}
+
+/* Light mode button active state */
+.theme-btn#light-mode-btn.active,
+.theme-btn#top-light-mode-btn.active {
+  background-color: #fff;
+  color: #f59e0b; /* Amber for sun icon */
+}
+
+body.dark-mode .theme-btn#light-mode-btn.active,
+body.dark-mode .theme-btn#top-light-mode-btn.active {
+  background-color: #374151;
+  color: #fbbf24;
+}
+
+/* Dark mode button active state */
+.theme-btn#dark-mode-btn.active,
+.theme-btn#top-dark-mode-btn.active {
+  color: #6366f1; /* Indigo for moon icon */
+}
+
+body.dark-mode .theme-btn#dark-mode-btn.active,
+body.dark-mode .theme-btn#top-dark-mode-btn.active {
+  color: #818cf8;
+}
+
+@media (max-width: 640px) {
+  .theme-toggle-container {
+    transform: scale(0.85);
+  }
+}
+
+/* Animation for dark mode toggle */
+#dark-mode-toggle {
+  transition: transform 0.3s ease;
+  opacity: 0.7;
+}
+
+#dark-mode-toggle:hover {
+  transform: rotate(15deg);
+  opacity: 1;
+}
+
+/* Custom hover effects for project and blog cards */
+.bg-white.p-6.rounded-lg:hover {
+  transform: translateY(-5px);
+}
+
+/* Custom styling for section headings */
+h2.text-2xl.font-bold {
+  position: relative;
+}
+
+h2.text-2xl.font-bold::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 50px;
+  height: 3px;
+  background-color: #3b82f6; /* Tailwind blue-500 */
+}
+
+/* Style for loaded profile picture */
+#profile-pic.loaded {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.2);
+  }
+  70% {
+    box-shadow: 0 0 0 5px rgba(59, 130, 246, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0);
+  }
+}
+
+/* Override Tailwind classes for links */
+.text-blue-600 {
+  color: #0000ff !important;
+}
+
+body.dark-mode .text-blue-600 {
+  color: #60a5fa !important; /* Tailwind blue-400 */
+}
+
+/* Arrow link styling for all sections */
+.company-arrow {
+  text-decoration: none !important;
+  padding-right: 0 !important;
+  margin-left: 0.25rem;
+  display: inline-block;
+  color: #0000ff !important;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+body.dark-mode .company-arrow {
+  color: #60a5fa !important; /* Tailwind blue-400 */
+}
+
+.company-arrow::after {
+  content: none !important;
+}
+
+.company-arrow:hover {
+  text-decoration: none !important;
+  opacity: 0.8;
+  transform: translateY(-2px);
+}
+
+/* Remove previous experience styling that's no longer needed */
+#experience h3 a.company-link,
+a[href].company-link,
+#experience h3 a.company-link::after,
+a[href].company-link::after {
+  content: initial;
+}
+
+/* Remove blog-specific styling since we're using company-arrow consistently */
+
+/* Blog and Projects section specific link styling */
+#blog a, #projects a {
+  color: inherit !important;
+  text-decoration: none !important;
+  transition: all 0.3s ease;
+}
+
+#blog a:hover, #projects a:hover {
+  color: #0000ff !important;
+  transform: translateY(-2px);
+}
+
+body.dark-mode #blog a:hover, 
+body.dark-mode #projects a:hover {
+  color: #60a5fa !important;
+}
+
+#blog a .text-blue-600,
+#projects a .text-blue-600 {
+  color: #0000ff !important;
+}
+
+body.dark-mode #blog a .text-blue-600,
+body.dark-mode #projects a .text-blue-600 {
+  color: #60a5fa !important;
+}
+
+/* Override the global link arrow for blog and projects sections */
+#blog a[href]::after,
+#projects a[href]::after {
+  content: none;
+}
+
+/* Smooth transition for hidden blog entries */
+#hidden-entries {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out;
+  opacity: 0;
+}
+
+#hidden-entries.visible {
+  max-height: 1000px; /* Adjust based on your content height */
+  opacity: 1;
+}
+
+/* Show More button transition */
+#show-more-btn {
+  transition: all 0.3s ease;
+}
+
+#show-more-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive header layout */
+@media (max-width: 640px) {
+  #intro .flex.items-center {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  #intro .w-16.h-16 {
+    margin-right: 0;
+    margin-bottom: 0.75rem;
+  }
+}
+

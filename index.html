@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="img/favicon.png" type="image/png">
+    <title>Javier Rivero</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+    <script>
+        // Debug script to ensure sticky nav works
+        window.addEventListener('load', function() {
+            console.log("Window loaded");
+            
+            // Get the sticky nav element
+            const stickyNav = document.getElementById('sticky-nav');
+            
+            if (stickyNav) {
+                console.log("Found sticky nav element");
+                
+                // Add scroll event listener directly here as a backup
+                window.addEventListener('scroll', function() {
+                    const scrollY = window.scrollY || window.pageYOffset;
+                    console.log("Scroll position:", scrollY);
+                    
+                    if (scrollY > 100) {
+                        stickyNav.classList.add('visible');
+                    } else {
+                        stickyNav.classList.remove('visible');
+                    }
+                });
+            }
+
+            // Show More functionality is now handled in script.js
+        });
+    </script>
+</head>
+<body class="bg-white text-gray-800">
+    <!-- Sticky Navigation Bar -->
+    <nav id="sticky-nav" class="fixed top-0 left-0 w-full z-50">
+        <div class="container mx-auto px-4 py-3 max-w-2xl flex justify-between items-center">
+            <div class="flex items-center">
+                <h1 class="text-lg font-bold">Javier Rivero</h1>
+            </div>
+            
+            <!-- Social Icons and Theme Toggle (Right) -->
+            <div class="flex gap-4 flex-row items-center">
+                <a href="https://www.linkedin.com/in/javierriveroe/" target="_blank" class="text-gray-400 hover:text-gray-600">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                    </svg>
+                </a>
+                <a href="mailto:josejavier.re@gmail.com" class="text-gray-400 hover:text-gray-600">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                        <polyline points="22,6 12,13 2,6"></polyline>
+                    </svg>
+                </a>
+                <!-- Theme Toggle -->
+                <div class="theme-toggle-container flex rounded-md bg-gray-100 p-0.5 scale-90">
+                    <!-- Light Mode (Sun) -->
+                    <button id="light-mode-btn" class="theme-btn flex items-center justify-center rounded-md p-1 transition-all" aria-label="Light Mode">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                        </svg>
+                    </button>
+                    
+                    <!-- Dark Mode (Moon) -->
+                    <button id="dark-mode-btn" class="theme-btn flex items-center justify-center rounded-md p-1 transition-all" aria-label="Dark Mode">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto px-4 py-12 max-w-2xl">
+        <!-- Top Bar with Theme Toggle and Social Icons -->
+        <div class="flex justify-between mb-12 items-center" id="top-bar">
+            <!-- Theme Toggle (Left) -->
+            <div class="theme-toggle-container flex rounded-md bg-gray-100 p-0.5 scale-90">
+                <!-- Light Mode (Sun) -->
+                <button id="top-light-mode-btn" class="theme-btn flex items-center justify-center rounded-md p-1 transition-all" aria-label="Light Mode">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                    </svg>
+                </button>
+                
+                <!-- Dark Mode (Moon) -->
+                <button id="top-dark-mode-btn" class="theme-btn flex items-center justify-center rounded-md p-1 transition-all" aria-label="Dark Mode">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                    </svg>
+                </button>
+            </div>
+            
+            <!-- Social Icons (Right) -->
+            <div class="flex gap-4 items-center" id="top-socials">
+                <a href="https://www.linkedin.com/in/javierriveroe/" target="_blank" class="text-gray-400 hover:text-gray-600">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                    </svg>
+                </a>
+                <a href="mailto:josejavier.re@gmail.com" class="text-gray-400 hover:text-gray-600">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                        <polyline points="22,6 12,13 2,6"></polyline>
+                    </svg>
+                </a>
+            </div>
+        </div>
+
+        <!-- Header/Intro Section -->
+        <header class="mb-20" id="intro">
+            <div class="flex items-center mb-10">
+                <div class="w-16 h-16 rounded-full overflow-hidden mr-4">
+                    <img id="profile-pic" src="img/profile.jpeg" alt="Profile Picture" class="w-full h-full object-cover">
+                </div>
+                <div>
+                    <h1 class="text-lg font-bold mb-0.5">Javier Rivero</h1>
+                    <h2 class="text-gray-500 text-sm">Head of CX Operations</h2>
+                </div>
+            </div>
+            <div class="text-base text-gray-700 space-y-4">
+                <p>
+                    I've helped teams at Stripe, Uber, and Philip Morris deliver exceptional customer experiences by optimizing operations and scaling top-performing teams.
+                </p>
+                <p>
+                    Beyond my day-to-day I like sharing insights from my leadership journey as a <a href="https://fastcompany.mx/author/javier-rivero/" class="company-arrow text-blue-600">FastCo writer ↗</a> and <a href="https://www.youtube.com/watch?v=m3ziI-vSYVw" class="company-arrow text-blue-600">TEDx speaker ↗</a>. Currently teaching Agile Leadership at <a href="https://collectiveacademy.com/" class="company-arrow text-blue-600">Collective Academy ↗</a>, empowering future leaders with practical methodologies.
+                </p>
+            </div>
+        </header>
+
+        <!-- Work Experience Section -->
+        <section class="mb-20" id="experience">
+            <h2 class="text-lg font-bold mb-8">Experience</h2>
+            
+            <div class="space-y-10">
+                <div class="flex">
+                    <div class="w-3/12 text-gray-400 flex-shrink-0 text-sm">2025 - Present</div>
+                    <div class="w-9/12 flex-grow">
+                        <h3 class="text-base font-semibold mb-1">
+                            Stripe <a href="https://www.stripe.com" target="_blank" class="company-arrow text-blue-600">↗</a>
+                        </h3>
+                        <p class="text-gray-700 text-sm">
+                            Currently building the best customer experience for Stripe's global operations.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="flex">
+                    <div class="w-3/12 text-gray-400 flex-shrink-0 text-sm">2018 - 2024</div>
+                    <div class="w-9/12 flex-grow">
+                        <h3 class="text-base font-semibold mb-1">
+                            Uber <a href="https://www.uber.com" target="_blank" class="company-arrow text-blue-600">↗</a>
+                        </h3>
+                        <p class="text-gray-700 text-sm">
+                            Led the design and development of customer experience solutions across Latin America, 
+                            optimizing support processes and enhancing service quality.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="flex">
+                    <div class="w-3/12 text-gray-400 flex-shrink-0 text-sm">2014 - 2018</div>
+                    <div class="w-9/12 flex-grow">
+                        <h3 class="text-base font-semibold mb-1">
+                            Philip Morris International <a href="https://www.pmi.com" target="_blank" class="company-arrow text-blue-600">↗</a>
+                        </h3>
+                        <p class="text-gray-700 text-sm">
+                            Redesigned the distribution experience, streamlined logistics flows, and led the implementation of new operational systems. 
+                        </p>
+                    </div>
+                </div>
+
+                <div class="flex">
+                    <div class="w-3/12 text-gray-400 flex-shrink-0 text-sm">2012</div>
+                    <div class="w-9/12 flex-grow">
+                        <h3 class="text-base font-semibold mb-1">
+                            Pirelli <a href="https://www.pirelli.com" target="_blank" class="company-arrow text-blue-600">↗</a>
+                        </h3>
+                        <p class="text-gray-700 text-sm">
+                            Worked on optimization projects across manufacturing processes, focusing on quality control 
+                            and efficiency improvements.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section class="mb-20" id="projects">
+            <h2 class="text-lg font-bold mb-8">Projects</h2>
+            
+            <div class="space-y-10">
+                <div class="flex">
+                    <div class="w-3/12 text-gray-400 flex-shrink-0 text-sm">2024</div>
+                    <div class="w-9/12 flex-grow">
+                        <h3 class="text-base font-semibold mb-1">
+                            <a href="http://www.leadershipstoa.com" class="group inline-flex items-center gap-1 hover:underline">
+                                Leadership Stoa
+                                <span class="text-blue-600 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
+                            </a>
+                        </h3>
+                        <p class="text-gray-700 text-sm">
+                            A modern invite-only community for leaders, offering cutting-edge tools and insights from industry experts. Our sessions in process innovation, collaborative leadership, and data science empower you to transform your potential into real-world impact.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="flex">
+                    <div class="w-3/12 text-gray-400 flex-shrink-0 text-sm">2025</div>
+                    <div class="w-9/12 flex-grow">
+                        <h3 class="text-base font-semibold mb-1">
+                            <a href="http://www.moodshelf.io" class="group inline-flex items-center gap-1 hover:underline">
+                                Moodhself
+                                <span class="text-blue-600 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
+                            </a>
+                        </h3>
+                        <p class="text-gray-700 text-sm">
+                            MoodShelf is an AI-powered book discovery platform that connects you with your next perfect read by understanding both your reading history and your current emotional state.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Blog Section -->
+        <section class="mb-20" id="blog">
+            <h2 class="text-lg font-bold mb-8">Writing</h2>
+            
+            <div class="space-y-10" id="blog-entries">
+                <div class="flex">
+                    <div class="w-3/12 text-gray-400 flex-shrink-0 text-sm">2024</div>
+                    <div class="w-9/12 flex-grow">
+                        <h3 class="text-base font-semibold">
+                            <a href="https://javierivero.medium.com/noise-in-the-age-of-silence-f38776743e90" class="group inline-flex items-center gap-1 hover:underline">
+                                Noise In the Age of Silence
+                                <span class="text-blue-600 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
+                            </a>
+                        </h3>
+                    </div>
+                </div>
+
+                <div class="flex">
+                    <div class="w-3/12 text-gray-400 flex-shrink-0 text-sm">2024</div>
+                    <div class="w-9/12 flex-grow">
+                        <h3 class="text-base font-semibold">
+                            <a href="https://javierivero.medium.com/the-day-i-met-isaac-newton-526e6277ef42" class="group inline-flex items-center gap-1 hover:underline">
+                                The Day I Met Isaac Newton
+                                <span class="text-blue-600 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
+                            </a>
+                        </h3>
+                    </div>
+                </div>
+
+                <div class="flex">
+                    <div class="w-3/12 text-gray-400 flex-shrink-0 text-sm">2023</div>
+                    <div class="w-9/12 flex-grow">
+                        <h3 class="text-base font-semibold">
+                            <a href="https://medium.com/the-modern-stoa/a-few-thoughts-on-leadership-f173eb7b8489" class="group inline-flex items-center gap-1 hover:underline">
+                                A Few Thoughts on Leadership
+                                <span class="text-blue-600 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
+                            </a>
+                        </h3>
+                    </div>
+                </div>
+
+                <div class="flex">
+                    <div class="w-3/12 text-gray-400 flex-shrink-0 text-sm">2023</div>
+                    <div class="w-9/12 flex-grow">
+                        <h3 class="text-base font-semibold">
+                            <a href="https://medium.com/the-modern-stoa/the-best-manager-is-also-a-philosopher-2c351f58386f" class="group inline-flex items-center gap-1 hover:underline">
+                                The Best Manager is also a Philosopher
+                                <span class="text-blue-600 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
+                            </a>
+                        </h3>
+                    </div>
+                </div>
+
+                <div class="space-y-10 hidden" id="hidden-entries">
+                    <div class="flex">
+                        <div class="w-3/12 text-gray-400 flex-shrink-0 text-sm">2022</div>
+                        <div class="w-9/12 flex-grow">
+                            <h3 class="text-base font-semibold">
+                                <a href="https://javierivero.medium.com/dealing-with-mediocrity-b4706e12686e" class="group inline-flex items-center gap-1 hover:underline">
+                                    Dealing With Mediocrity
+                                    <span class="text-blue-600 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
+                                </a>
+                            </h3>
+                        </div>
+                    </div>
+
+                    <div class="flex">
+                        <div class="w-3/12 text-gray-400 flex-shrink-0 text-sm">2022</div>
+                        <div class="w-9/12 flex-grow">
+                            <h3 class="text-base font-semibold">
+                                <a href="https://medium.com/the-modern-stoa/kanye-west-and-the-impostor-syndrome-9e94ab7b2458" class="group inline-flex items-center gap-1 hover:underline">
+                                    Kanye West and the Imposter Syndrome
+                                    <span class="text-blue-600 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
+                                </a>
+                            </h3>
+                        </div>
+                    </div>
+
+                    <div class="flex">
+                        <div class="w-3/12 text-gray-400 flex-shrink-0 text-sm">2021</div>
+                        <div class="w-9/12 flex-grow">
+                            <h3 class="text-base font-semibold">
+                                <a href="https://medium.com/the-modern-stoa/in-defense-of-modern-burn-out-8f53a6a88090" class="group inline-flex items-center gap-1 hover:underline">
+                                    In Defense Of Modern Burnout
+                                    <span class="text-blue-600 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
+                                </a>
+                            </h3>
+                        </div>
+                    </div>
+
+                    <div class="flex">
+                        <div class="w-3/12 text-gray-400 flex-shrink-0 text-sm">2021</div>
+                        <div class="w-9/12 flex-grow">
+                            <h3 class="text-base font-semibold">
+                                <a href="https://medium.com/the-modern-stoa/the-kpi-fallacy-abba9cde2c3d" class="group inline-flex items-center gap-1 hover:underline">
+                                    The KPI Fallacy
+                                    <span class="text-blue-600 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
+                                </a>
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-8">
+                <button id="show-more-btn" class="px-4 py-2 rounded-full border border-gray-300 text-gray-500 hover:text-gray-700 hover:border-gray-400 text-sm font-medium transition-colors duration-200">
+                    Show More
+                </button>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="mb-16" id="contact">
+            <h2 class="text-lg font-bold mb-4">Get in touch</h2>
+            
+            <p class="text-gray-700 text-sm">
+                I always love to hear about new ideas and projects. If you're looking for a consultant, 
+                development help, or have any queries, <a href="mailto:josejavier.re@gmail.com">send me an email</a>.
+            </p>
+        </section>
+
+        <!-- Footer -->
+        <footer class="text-center text-gray-400 pt-8 border-t border-gray-100 text-xs">
+            <p>© <span class="copyright-year">2025</span> Javier Rivero. <a href="https://open.spotify.com/playlist/42AdEfFuuS9xYRHOoyttca?si=72049cbb30024c4c" target="_blank" class="text-gray-400 hover:text-gray-600">♬</a></p>
+        </footer>
+    </div>
+</body>
+</html> 
