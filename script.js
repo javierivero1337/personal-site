@@ -198,14 +198,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 setTimeout(() => {
                     hiddenEntries.classList.add('visible');
                 }, 10);
-                showMoreBtn.textContent = 'Show Less Articles';
+                showMoreBtn.textContent = 'Show Less';
             } else {
                 hiddenEntries.classList.remove('visible');
                 // Wait for the transition to complete before hiding the element
                 setTimeout(() => {
                     hiddenEntries.classList.add('hidden');
                 }, 500); // Match this with the transition duration in CSS
-                showMoreBtn.textContent = 'Show More Articles';
+                showMoreBtn.textContent = 'Show More';
             }
         });
     }

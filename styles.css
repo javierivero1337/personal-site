@@ -185,7 +185,7 @@ a:hover .text-gray-400 {
   
   .w-16, .w-20, .w-24 {
     width: 100%;
-    margin-bottom: 0.5rem;
+
   }
   
   /* Fix for experience section on mobile */
@@ -195,17 +195,14 @@ a:hover .text-gray-400 {
   
   #experience .w-3\/12, #projects .w-3\/12, #blog .w-3\/12 {
     width: 100%;
-    margin-bottom: 0.25rem; /* Reduced margin */
+ 
   }
   
   #experience .w-9\/12, #projects .w-9\/12, #blog .w-9\/12 {
     width: 100%;
   }
   
-  /* Adjust section spacing */
-  section {
-    margin-bottom: 2.5rem !important;
-  }
+
   
   /* Adjust paragraph spacing */
   p {
@@ -348,40 +345,27 @@ body.dark-mode .theme-btn#top-dark-mode-btn.active {
 
 @media (max-width: 640px) {
   .theme-toggle-container {
-    transform: scale(0.75); /* Even smaller on mobile */
+
     flex-direction: row !important;
     width: auto;
-    min-width: 50px; /* Smaller minimum width */
   }
   
   /* Make sure the buttons are side by side */
   .theme-btn {
-    width: 22px; /* Smaller for mobile */
-    height: 22px;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 3px; /* Reduced padding */
+    padding: 5px; /* Reduced padding */
   }
   
   /* Ensure the sticky nav theme toggle is horizontal and smaller */
   #sticky-nav .theme-toggle-container {
     flex-direction: row !important;
     margin-left: 0.15rem;
-    min-width: 45px; /* Even smaller for sticky nav */
+    
   }
   
-  /* Make the icons slightly smaller on mobile */
-  .theme-btn svg {
-    width: 12px; /* Smaller icons */
-    height: 12px;
-  }
-  
-  /* Make the sticky nav icons even smaller */
-  #sticky-nav .theme-btn svg {
-    width: 10px; /* Even smaller icons for sticky nav */
-    height: 10px;
-  }
+
 }
 
 /* Animation for dark mode toggle */
@@ -537,20 +521,16 @@ body.dark-mode #projects a .text-blue-600 {
   #intro .flex.items-center {
     flex-direction: row !important;
     align-items: center;
-    margin-top: 0.5rem; /* Reduced top margin */
+
   }
   
   #intro .w-16.h-16 {
     width: 3.5rem; /* Slightly smaller profile pic */
     height: 3.5rem;
-    margin-bottom: 0;
     margin-right: 0.75rem; /* Reduced margin */
   }
   
-  /* Reduce the margin below the intro header */
-  #intro .mb-10 {
-    margin-bottom: 0.75rem !important;
-  }
+
   
   /* Fix for experience section layout on mobile */
   #experience .flex, #projects .flex, #blog-entries .flex {
@@ -562,35 +542,10 @@ body.dark-mode #projects a .text-blue-600 {
   #experience .w-3\/12, #projects .w-3\/12, #blog-entries .w-3\/12 {
     font-size: 0.75rem;
     opacity: 0.7;
-    margin-bottom: 0.25rem; /* Reduced margin */
+   
   }
-  
-  /* Reduce spacing between items in sections */
-  #experience .space-y-10, 
-  #projects .space-y-10, 
-  #blog .space-y-10,
-  #blog-entries.space-y-10 {
-    --tw-space-y-reverse: 0;
-    margin-top: calc(1.25rem * calc(1 - var(--tw-space-y-reverse)));
-    margin-bottom: calc(1.25rem * var(--tw-space-y-reverse));
-  }
-  
-  /* Override the space-y-10 class for mobile */
-  .space-y-10 > :not([hidden]) ~ :not([hidden]) {
-    --tw-space-y-reverse: 0;
-    margin-top: calc(1.25rem * calc(1 - var(--tw-space-y-reverse)));
-    margin-bottom: calc(1.25rem * var(--tw-space-y-reverse));
-  }
-  
-  /* Reduce spacing between sections */
-  .mb-20 {
-    margin-bottom: 3rem !important;
-  }
-  
-  /* Reduce spacing between section title and content */
-  h2.text-lg.font-bold.mb-8 {
-    margin-bottom: 1rem !important;
-  }
+
+ 
 }
 
 /* Mobile Navigation Menu */
