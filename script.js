@@ -141,9 +141,8 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         };
 
-        // Check for saved theme preference or use system preference as default
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        const savedTheme = localStorage.getItem('theme') || (prefersDark ? 'dark' : 'light');
+        // Check for saved theme preference or use light theme as default
+        const savedTheme = localStorage.getItem('theme') || 'light';
         applyTheme(savedTheme);
 
         // Add event listeners for sticky nav theme buttons
@@ -182,13 +181,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 applyTheme('dark');
             });
         }
-        
-        // Listen for system changes to update if no preference is set
-        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
-            if (!localStorage.getItem('theme')) {
-                applyTheme(e.matches ? 'dark' : 'light');
-            }
-        });
     }
 
     // Show More functionality with smooth transition
