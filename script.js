@@ -16,6 +16,13 @@ document.addEventListener('DOMContentLoaded', function() {
                     behavior: 'smooth',
                     block: 'start'
                 });
+                
+                // Close mobile menu if it's open when clicking a navigation link
+                const mobileMenu = document.getElementById('mobile-nav-menu');
+                if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                    document.body.classList.remove('overflow-hidden');
+                }
             }
         });
     });
@@ -36,6 +43,35 @@ document.addEventListener('DOMContentLoaded', function() {
         if (window.scrollY > 100) {
             stickyNav.classList.add('visible');
         }
+    }
+
+    // Mobile menu functionality (only for the full-screen menu)
+    const closeMenuButton = document.getElementById('close-mobile-menu');
+    const mobileMenu = document.getElementById('mobile-nav-menu');
+    const stickyNavTitle = document.getElementById('sticky-nav-title');
+    
+    if (closeMenuButton && mobileMenu) {
+        // Open mobile menu when clicking on the name in sticky nav
+        if (stickyNavTitle) {
+            stickyNavTitle.addEventListener('click', function() {
+                mobileMenu.classList.remove('hidden');
+                document.body.classList.add('overflow-hidden'); // Prevent scrolling when menu is open
+            });
+        }
+        
+        // Close mobile menu
+        closeMenuButton.addEventListener('click', function() {
+            mobileMenu.classList.add('hidden');
+            document.body.classList.remove('overflow-hidden');
+        });
+        
+        // Close menu when clicking outside
+        mobileMenu.addEventListener('click', function(e) {
+            if (e.target === mobileMenu) {
+                mobileMenu.classList.add('hidden');
+                document.body.classList.remove('overflow-hidden');
+            }
+        });
     }
 
     // Add current year to the footer copyright
@@ -62,6 +98,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const topDarkModeBtn = document.getElementById('top-dark-mode-btn');
     const topThemeButtons = [topLightModeBtn, topDarkModeBtn];
     
+    // Mobile menu theme toggle buttons
+    const mobileLightModeBtn = document.getElementById('mobile-light-mode-btn');
+    const mobileDarkModeBtn = document.getElementById('mobile-dark-mode-btn');
+    const mobileThemeButtons = mobileLightModeBtn && mobileDarkModeBtn ? [mobileLightModeBtn, mobileDarkModeBtn] : [];
+    
     if (lightModeBtn && darkModeBtn && topLightModeBtn && topDarkModeBtn) {
         
         // Function to update active button
@@ -73,14 +114,19 @@ document.addEventListener('DOMContentLoaded', function() {
             topThemeButtons.forEach(btn => {
                 if (btn) btn.classList.remove('active');
             });
+            mobileThemeButtons.forEach(btn => {
+                if (btn) btn.classList.remove('active');
+            });
             
             // Set active state based on theme
             if (theme === 'light') {
                 lightModeBtn.classList.add('active');
                 topLightModeBtn.classList.add('active');
+                if (mobileLightModeBtn) mobileLightModeBtn.classList.add('active');
             } else if (theme === 'dark') {
                 darkModeBtn.classList.add('active');
                 topDarkModeBtn.classList.add('active');
+                if (mobileDarkModeBtn) mobileDarkModeBtn.classList.add('active');
             }
         };
 
@@ -121,6 +167,21 @@ document.addEventListener('DOMContentLoaded', function() {
             localStorage.setItem('theme', 'dark');
             applyTheme('dark');
         });
+        
+        // Add event listeners for mobile menu theme buttons
+        if (mobileLightModeBtn) {
+            mobileLightModeBtn.addEventListener('click', function() {
+                localStorage.setItem('theme', 'light');
+                applyTheme('light');
+            });
+        }
+        
+        if (mobileDarkModeBtn) {
+            mobileDarkModeBtn.addEventListener('click', function() {
+                localStorage.setItem('theme', 'dark');
+                applyTheme('dark');
+            });
+        }
         
         // Listen for system changes to update if no preference is set
         window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
