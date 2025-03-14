@@ -9,6 +9,55 @@
     
     <link rel="stylesheet" href="styles.css">
     <script src="script.js" defer></script>
+    <style>
+        /* Staggered fade-in animations for sections */
+        @keyframes sectionFadeIn {
+            from { 
+                opacity: 0; 
+                transform: translateY(20px);
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0);
+            }
+        }
+        
+        .section-fade {
+            opacity: 0;
+            visibility: hidden; /* Hide sections completely until ready */
+            will-change: opacity, transform; /* Optimize for animation performance */
+        }
+        
+        .section-fade.visible {
+            visibility: visible; /* Make visible when ready to animate */
+            animation: sectionFadeIn 0.8s ease-out forwards;
+        }
+        
+        /* Staggered delay for each section */
+        #intro.visible {
+            animation-delay: 0.1s;
+        }
+        
+        #experience.visible {
+            animation-delay: 0.2s;
+        }
+        
+        #projects.visible {
+            animation-delay: 0.3s;
+        }
+        
+        #blog.visible {
+            animation-delay: 0.4s;
+        }
+        
+        #contact.visible {
+            animation-delay: 0.5s;
+        }
+        
+        footer.visible {
+            animation-delay: 0.6s;
+        }
+    </style>
     <script>
         // Debug script to ensure sticky nav works
         window.addEventListener('load', function() {
@@ -34,7 +83,50 @@
             }
 
             // Show More functionality is now handled in script.js
+            
+            // Initialize section animations
+            initSectionAnimations();
         });
+        
+        // Function to handle section animations on scroll
+        function initSectionAnimations() {
+            // Get all sections with the section-fade class
+            const sections = document.querySelectorAll('.section-fade');
+            
+            // Initial check for sections in viewport
+            checkSections(sections);
+            
+            // Add scroll event listener to check for sections
+            window.addEventListener('scroll', function() {
+                checkSections(sections);
+            });
+            
+            // Make intro section visible immediately if it's at the top
+            const introSection = document.getElementById('intro');
+            if (introSection) {
+                setTimeout(() => {
+                    introSection.classList.add('visible');
+                }, 100);
+            }
+        }
+        
+        // Function to check if sections are in viewport
+        function checkSections(sections) {
+            sections.forEach(section => {
+                if (isElementInViewport(section) && !section.classList.contains('visible')) {
+                    section.classList.add('visible');
+                }
+            });
+        }
+        
+        // Helper function to check if element is in viewport
+        function isElementInViewport(el) {
+            const rect = el.getBoundingClientRect();
+            return (
+                rect.top <= (window.innerHeight || document.documentElement.clientHeight) * 0.85 &&
+                rect.bottom >= 0
+            );
+        }
     </script>
 </head>
 <body class="bg-white text-gray-800">
@@ -117,7 +209,7 @@
         </div>
 
         <!-- Header/Intro Section -->
-        <header class="mb-20 mt-20" id="intro">
+        <header class="mb-20 mt-20 section-fade" id="intro">
             <div class="flex items-center mb-20">
                 <div class="w-16 h-16 rounded-full overflow-hidden mr-4">
                     <img id="profile-pic" src="img/profile.jpeg" alt="Profile Picture" class="w-full h-full object-cover">
@@ -197,7 +289,7 @@
         </div>
 
         <!-- Work Experience Section -->
-        <section class="mb-20" id="experience">
+        <section class="mb-20 section-fade" id="experience">
             <h2 class="text-lg font-bold mb-8">Experience</h2>
             
             <div class="space-y-10">
@@ -254,7 +346,7 @@
         </section>
 
         <!-- Projects Section -->
-        <section class="mb-20" id="projects">
+        <section class="mb-20 section-fade" id="projects">
             <h2 class="text-lg font-bold mb-8">Projects</h2>
             
             <div class="space-y-10">
@@ -291,7 +383,7 @@
         </section>
 
         <!-- Blog Section -->
-        <section class="mb-20" id="blog">
+        <section class="mb-20 section-fade" id="blog">
             <h2 class="text-lg font-bold mb-8">Writing</h2>
             
             <div class="space-y-10" id="blog-entries">
@@ -414,7 +506,7 @@
         </section>
 
         <!-- Contact Section -->
-        <section class="mb-16" id="contact">
+        <section class="mb-16 section-fade" id="contact">
             <h2 class="text-lg font-bold mb-4">Get in touch</h2>
             
             <p class="text-gray-700 text-sm">
@@ -424,7 +516,7 @@
         </section>
 
         <!-- Footer -->
-        <footer class="text-center text-gray-400 pt-8 border-t border-gray-100 text-xs">
+        <footer class="text-center text-gray-400 pt-8 border-t border-gray-100 text-xs section-fade">
             <p>© <span class="copyright-year">2025</span> Javier Rivero. <a href="https://open.spotify.com/playlist/42AdEfFuuS9xYRHOoyttca?si=72049cbb30024c4c" target="_blank" class="text-gray-400 hover:text-gray-600">♬</a></p>
         </footer>
     </div>
