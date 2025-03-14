@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="img/favicon.png" type="image/png">
-    <title>Blog Post Title - Javier Rivero</title>
+    <title>On Identity - Javier Rivero</title>
     <script src="https://cdn.tailwindcss.com"></script>
     
     <link rel="stylesheet" href="styles.css">
@@ -26,6 +26,55 @@
             opacity: 0;
             animation: smoothFadeIn 0.8s ease-out forwards;
             animation-delay: 0.2s; /* Slight delay for better user experience */
+        }
+
+        /* Mobile-specific styles */
+        @media (max-width: 640px) {
+            .back-link-text {
+                font-size: 0.9rem;
+                display: inline;
+            }
+            
+            .blog-meta {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                text-align: left;
+            }
+            
+            .blog-meta > * {
+                margin-right: 0.5rem;
+                display: inline;
+            }
+        }
+        
+        /* Back link hover effect */
+        .back-link {
+            transition: all 0.2s ease;
+        }
+        
+        .back-link-text {
+            position: relative;
+        }
+        
+        .back-link-text::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: 0;
+            left: 0;
+            background-color: currentColor;
+            transition: width 0.3s ease;
+        }
+        
+        .back-link:hover .back-link-text::after {
+            width: 100%;
+        }
+        
+        /* Remove the default underline */
+        .back-link:hover .back-link-text {
+            text-decoration: none;
         }
     </style>
     <script>
@@ -55,24 +104,20 @@
     </script>
 </head>
 <body class="bg-white text-gray-800">
-    <!-- Sticky Navigation Bar -->
-    
-    <nav id="sticky-nav" class="fixed top-0 left-0 w-full z-50">
+    <!-- Sticky Navigation Bar - Only visible on scroll -->
+    <nav id="sticky-nav" class="fixed top-0 left-0 w-full z-50 bg-white shadow-sm opacity-0 transition-opacity duration-300">
         <div class="container mx-auto px-4 py-3 max-w-2xl flex justify-between items-center">
             <div class="flex items-center">
-                <a href="index.html" class="back-link flex items-center gap-2 group">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <a href="index.html" class="back-link inline-flex items-center group">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
                     </svg>
-                    <span class="back-link-text">
-                        Back to Home
-                        <span></span>
-                    </span>
+                    <span class="back-link-text">Back to Home</span>
                 </a>
             </div>
             
             <!-- Theme Toggle (Right) -->
-            <div class="theme-toggle-container flex rounded-md bg-gray-100 p-0.5 scale-90">
+            <div class="theme-toggle-container flex rounded-md bg-gray-100 p-0.5">
                 <!-- Light Mode (Sun) -->
                 <button id="light-mode-btn" class="theme-btn flex items-center justify-center rounded-md p-1 transition-all" aria-label="Light Mode">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -90,23 +135,19 @@
         </div>
     </nav>
     
-
-    <div class="container mx-auto px-6 pt-6 pb-12 max-w-2xl" id="main-container">
+    <div class="container mx-auto px-8 sm:px-10 pt-6 pb-10 max-w-2xl" id="main-container">
         <!-- Top Bar with Back Button and Theme Toggle -->
-        <div class="flex justify-between mb-12 items-center" id="top-bar">
+        <div class="flex justify-between mb-8 sm:mb-12 items-center" id="top-bar">
             <!-- Back Button (Left) -->
-            <a href="index.html" class="back-link flex items-center gap-2 group">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <a href="index.html" class="back-link inline-flex items-center group">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
                 </svg>
-                <span class="back-link-text">
-                    Back to Home
-                    <span></span>
-                </span>
+                <span class="back-link-text">Back to Home</span>
             </a>
             
             <!-- Theme Toggle (Right) -->
-            <div class="theme-toggle-container flex rounded-md bg-gray-100 p-0.5 scale-90">
+            <div class="theme-toggle-container flex rounded-md bg-gray-100 p-0.5">
                 <!-- Light Mode (Sun) -->
                 <button id="top-light-mode-btn" class="theme-btn flex items-center justify-center rounded-md p-1 transition-all" aria-label="Light Mode">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -127,11 +168,11 @@
         <div class="fade-in-content">
             <!-- Blog Post Header -->
             <header class="mb-8">
-                <h1 class="text-3xl font-bold mb-2">On Identity</h1>
-                <div class="flex items-center text-gray-500 mb-4">
-                    <time datetime="2023-06-15">March 15, 2025</time>
-                    <span class="mx-2">•</span>
-                    <span>1 min read</span>
+                <h1 class="text-2xl sm:text-3xl font-bold mb-4 text-left">On Identity</h1>
+                <div class="blog-meta text-gray-500 mb-6 text-sm sm:text-base">
+                    <time datetime="2025-03-15" class="inline">March 15, 2025</time>
+                    <span class="separator mx-2 inline">•</span>
+                    <span class="inline">1 min read</span>
                 </div>
             </header>
 
@@ -155,7 +196,20 @@
 
             
     <script>
-        // Additional blog-specific JavaScript can go here
+        // Script to handle sticky nav visibility
+        document.addEventListener('DOMContentLoaded', function() {
+            const stickyNav = document.getElementById('sticky-nav');
+            
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 100) {
+                    stickyNav.classList.add('opacity-100');
+                    stickyNav.classList.remove('opacity-0');
+                } else {
+                    stickyNav.classList.remove('opacity-100');
+                    stickyNav.classList.add('opacity-0');
+                }
+            });
+        });
     </script>
 </body>
 </html> 
