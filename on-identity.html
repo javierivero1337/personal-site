@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="img/favicon.png" type="image/png">
+    <title>Blog Post Title - Javier Rivero</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+    <script>
+        // Debug script to ensure sticky nav works
+        window.addEventListener('load', function() {
+            console.log("Window loaded");
+            
+            // Get the sticky nav element
+            const stickyNav = document.getElementById('sticky-nav');
+            
+            if (stickyNav) {
+                console.log("Found sticky nav element");
+                
+                // Add scroll event listener directly here as a backup
+                window.addEventListener('scroll', function() {
+                    const scrollY = window.scrollY || window.pageYOffset;
+                    console.log("Scroll position:", scrollY);
+                    
+                    if (scrollY > 100) {
+                        stickyNav.classList.add('visible');
+                    } else {
+                        stickyNav.classList.remove('visible');
+                    }
+                });
+            }
+        });
+    </script>
+</head>
+<body class="bg-white text-gray-800">
+    <!-- Sticky Navigation Bar -->
+    
+    <nav id="sticky-nav" class="fixed top-0 left-0 w-full z-50">
+        <div class="container mx-auto px-4 py-3 max-w-2xl flex justify-between items-center">
+            <div class="flex items-center">
+                <a href="index.html" class="back-link flex items-center gap-2 group">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                    </svg>
+                    <span class="back-link-text">
+                        Back to Home
+                        <span></span>
+                    </span>
+                </a>
+            </div>
+            
+            <!-- Theme Toggle (Right) -->
+            <div class="theme-toggle-container flex rounded-md bg-gray-100 p-0.5 scale-90">
+                <!-- Light Mode (Sun) -->
+                <button id="light-mode-btn" class="theme-btn flex items-center justify-center rounded-md p-1 transition-all" aria-label="Light Mode">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                    </svg>
+                </button>
+                
+                <!-- Dark Mode (Moon) -->
+                <button id="dark-mode-btn" class="theme-btn flex items-center justify-center rounded-md p-1 transition-all" aria-label="Dark Mode">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+    
+
+    <div class="container mx-auto px-6 pt-6 pb-12 max-w-2xl" id="main-container">
+        <!-- Top Bar with Back Button and Theme Toggle -->
+        <div class="flex justify-between mb-12 items-center" id="top-bar">
+            <!-- Back Button (Left) -->
+            <a href="index.html" class="back-link flex items-center gap-2 group">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+                <span class="back-link-text">
+                    Back to Home
+                    <span></span>
+                </span>
+            </a>
+            
+            <!-- Theme Toggle (Right) -->
+            <div class="theme-toggle-container flex rounded-md bg-gray-100 p-0.5 scale-90">
+                <!-- Light Mode (Sun) -->
+                <button id="top-light-mode-btn" class="theme-btn flex items-center justify-center rounded-md p-1 transition-all" aria-label="Light Mode">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                    </svg>
+                </button>
+                
+                <!-- Dark Mode (Moon) -->
+                <button id="top-dark-mode-btn" class="theme-btn flex items-center justify-center rounded-md p-1 transition-all" aria-label="Dark Mode">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Blog Post Header -->
+        <header class="mb-8">
+            <h1 class="text-3xl font-bold mb-2">On Identity</h1>
+            <div class="flex items-center text-gray-500 mb-4">
+                <time datetime="2023-06-15">March 15, 2025</time>
+                <span class="mx-2">•</span>
+                <span>1 min read</span>
+            </div>
+        </header>
+
+        <!-- Blog Post Content -->
+        <article class="prose prose-lg max-w-none">
+            <!-- Main content section -->
+            <section class="mb-8">
+                <p class="mb-4">
+                    
+We enjoy certain music that show others how we see the world and what moves us.</br></br>
+We enjoy dressing in ways that express who we are and what we care about.</br></br>
+We appreciate art that feels personal, reflecting our experiences and how we understand life.</br></br>
+The problem with fixating on these traits as rigid parts of our identity is that we stop stretching our minds, closing ourselves off to new ideas, experiences, and perspectives. We cling so tightly to what we've rooted as our identity that we become resistant to change and limit our own growth.</br></br>
+The remedy is a fluid identity—free to evolve, unshaken by others, and open to the infinite possibilities of becoming.
+                </p>
+                
+            </section>
+
+            
+    <script>
+        // Additional blog-specific JavaScript can go here
+    </script>
+</body>
+</html> 

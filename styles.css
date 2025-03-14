@@ -459,16 +459,96 @@ a[href].company-link::after {
 
 /* Remove blog-specific styling since we're using company-arrow consistently */
 
+/* Back to Home link styling for blog posts */
+.back-link {
+  color: #333 !important;
+  text-decoration: none !important;
+  position: relative;
+}
+
+.back-link svg {
+  color: #0000ff !important;
+}
+
+.back-link:hover {
+  color: #0000ff !important;
+  text-decoration: none !important;
+}
+
+/* Underline animation for back-link */
+.back-link-text span {
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: #0000ff !important;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease-in-out;
+}
+
+.back-link.group:hover .back-link-text span {
+  transform: scaleX(1) !important;
+}
+
+body.dark-mode .back-link {
+  color: #f3f4f6 !important; /* Light gray in dark mode */
+}
+
+body.dark-mode .back-link svg {
+  color: #60a5fa !important; /* Tailwind blue-400 */
+}
+
+body.dark-mode .back-link:hover {
+  color: #60a5fa !important;
+}
+
+body.dark-mode .back-link-text span {
+  background-color: #60a5fa !important;
+}
+
+/* Override the global link styling for back-link */
+.back-link::after {
+  content: none !important;
+}
+
 /* Blog and Projects section specific link styling */
 #blog a, #projects a {
   color: inherit !important;
   text-decoration: none !important;
   transition: all 0.3s ease;
+  position: relative;
 }
 
 #blog a:hover, #projects a:hover {
   color: #0000ff !important;
-  transform: translateY(-2px);
+}
+
+/* Add the sliding underline effect to blog and projects links */
+#blog a .text-blue-600,
+#projects a .text-blue-600 {
+  color: #0000ff !important;
+}
+
+/* Create the sliding underline for blog and projects links */
+#blog a:not(.back-link):not([class*="company-arrow"]):after,
+#projects a:not(.back-link):not([class*="company-arrow"]):after {
+  content: '' !important;
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: #0000ff !important;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease-in-out;
+}
+
+#blog a:not(.back-link):not([class*="company-arrow"]):hover:after,
+#projects a:not(.back-link):not([class*="company-arrow"]):hover:after {
+  transform: scaleX(1);
 }
 
 body.dark-mode #blog a:hover, 
@@ -476,9 +556,9 @@ body.dark-mode #projects a:hover {
   color: #60a5fa !important;
 }
 
-#blog a .text-blue-600,
-#projects a .text-blue-600 {
-  color: #0000ff !important;
+body.dark-mode #blog a:not(.back-link):not([class*="company-arrow"]):after,
+body.dark-mode #projects a:not(.back-link):not([class*="company-arrow"]):after {
+  background-color: #60a5fa !important;
 }
 
 body.dark-mode #blog a .text-blue-600,
@@ -486,10 +566,9 @@ body.dark-mode #projects a .text-blue-600 {
   color: #60a5fa !important;
 }
 
-/* Override the global link arrow for blog and projects sections */
-#blog a[href]::after,
-#projects a[href]::after {
-  content: none;
+/* Remove the translateY effect from blog and projects links */
+#blog a:hover, #projects a:hover {
+  transform: none;
 }
 
 /* Smooth transition for hidden blog entries */
