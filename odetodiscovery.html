@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="img/favicon.png" type="image/png">
+    <title>An Ode to Discovery and Wander - Javier Rivero</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+    <style>
+        /* Smooth fade-in animation specifically for this blog post */
+        @keyframes smoothFadeIn {
+            from { 
+                opacity: 0; 
+                transform: translateY(10px);
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0);
+            }
+        }
+        
+        .fade-in-content {
+            opacity: 0;
+            animation: smoothFadeIn 0.8s ease-out forwards;
+            animation-delay: 0.2s; /* Slight delay for better user experience */
+        }
+
+        /* Mobile-specific styles */
+        @media (max-width: 640px) {
+            .back-link-text {
+                font-size: 0.9rem;
+                display: inline;
+            }
+            
+            .blog-meta {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                text-align: left;
+            }
+            
+            .blog-meta > * {
+                margin-right: 0.5rem;
+                display: inline;
+            }
+        }
+        
+        /* Back link hover effect */
+        .back-link {
+            transition: all 0.2s ease;
+        }
+        
+        .back-link-text {
+            position: relative;
+        }
+        
+        .back-link-text::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: 0;
+            left: 0;
+            background-color: currentColor;
+            transition: width 0.3s ease;
+        }
+        
+        .back-link:hover .back-link-text::after {
+            width: 100%;
+        }
+        
+        /* Remove the default underline */
+        .back-link:hover .back-link-text {
+            text-decoration: none;
+        }
+    </style>
+    <script>
+        // Debug script to ensure sticky nav works
+        window.addEventListener('load', function() {
+            console.log("Window loaded");
+            
+            // Get the sticky nav element
+            const stickyNav = document.getElementById('sticky-nav');
+            
+            if (stickyNav) {
+                console.log("Found sticky nav element");
+                
+                // Add scroll event listener directly here as a backup
+                window.addEventListener('scroll', function() {
+                    const scrollY = window.scrollY || window.pageYOffset;
+                    console.log("Scroll position:", scrollY);
+                    
+                    if (scrollY > 100) {
+                        stickyNav.classList.add('visible');
+                    } else {
+                        stickyNav.classList.remove('visible');
+                    }
+                });
+            }
+        });
+    </script>
+</head>
+<body class="bg-white text-gray-800">
+    <!-- Sticky Navigation Bar - Only visible on scroll -->
+    <nav id="sticky-nav" class="fixed top-0 left-0 w-full z-50 bg-white shadow-sm opacity-0 transition-opacity duration-300">
+        <div class="container mx-auto px-4 py-3 max-w-2xl flex justify-between items-center">
+            <div class="flex items-center">
+                <a href="index.html" class="back-link inline-flex items-center group">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                    </svg>
+                    <span class="back-link-text">Back to Home</span>
+                </a>
+            </div>
+            
+            <!-- Theme Toggle (Right) -->
+            <div class="theme-toggle-container flex rounded-md bg-gray-100 p-0.5">
+                <!-- Light Mode (Sun) -->
+                <button id="light-mode-btn" class="theme-btn flex items-center justify-center rounded-md p-1 transition-all" aria-label="Light Mode">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                    </svg>
+                </button>
+                
+                <!-- Dark Mode (Moon) -->
+                <button id="dark-mode-btn" class="theme-btn flex items-center justify-center rounded-md p-1 transition-all" aria-label="Dark Mode">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="container mx-auto px-8 sm:px-10 pt-6 pb-10 max-w-2xl" id="main-container">
+        <!-- Top Bar with Back Button and Theme Toggle -->
+        <div class="flex justify-between mb-8 sm:mb-12 items-center" id="top-bar">
+            <!-- Back Button (Left) -->
+            <a href="/" class="back-link inline-flex items-center group">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+                <span class="back-link-text">Back to Home</span>
+            </a>
+            
+            <!-- Theme Toggle (Right) -->
+            <div class="theme-toggle-container flex rounded-md bg-gray-100 p-0.5">
+                <!-- Light Mode (Sun) -->
+                <button id="top-light-mode-btn" class="theme-btn flex items-center justify-center rounded-md p-1 transition-all" aria-label="Light Mode">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                    </svg>
+                </button>
+                
+                <!-- Dark Mode (Moon) -->
+                <button id="top-dark-mode-btn" class="theme-btn flex items-center justify-center rounded-md p-1 transition-all" aria-label="Dark Mode">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Blog Post Content - Added fade-in-content class -->
+        <div class="fade-in-content">
+            <!-- Blog Post Header -->
+            <header class="mb-8">
+                <h1 class="text-2xl sm:text-3xl font-bold mb-4 text-left">An Ode To Discovery & Wander</h1>
+                <div class="blog-meta text-gray-500 mb-6 text-sm sm:text-base">
+                    <time datetime="2025-03-15" class="inline">May 6, 2025</time>
+                    <span class="separator mx-2 inline">•</span>
+                    <span class="inline">2 min read</span>
+                </div>
+            </header>
+
+            <!-- Blog Post Content -->
+            <article class="prose prose-lg max-w-none">
+                <!-- Main content section -->
+                <section class="mb-8">
+                    <p class="mb-4">
+                        I'm all for algorithms suggesting what pair of running shoes I should get, I mean, they already know how much I like Nikes. No, I don't care how "good" those Hoka's are.
+
+In this new controversial AI-era driven by algorithmic feeds that dictate what should capture your attention next, it's crucial for us to fight our way back to a more analogue-like process of discovery.
+<br><br>
+<b>Wait, analogue – what?</b>
+<br><br>
+People who know me know that I love books. After visiting tons of famous and not so famous bookstores worldwide, I realized what makes these spaces truly magical is not the shopping itself, but that incomparable sense of discovery that happens as you step in.
+<br><br>
+Oddly enough, the one I spend the most time in is <a href="https://libreria.io/" target="_blank">Librería</a>, probably the smallest one among them all. 
+<br><br>
+Why is that? I kept wondering as I made my way through their tiny hallway, admiring how they arrange their books in this quirky way that ditches the traditional genre-based shelves. 
+<br><br>
+They cluster books around ideas, mixing non-fiction with novels (I know, groundbreaking right?) Sometimes you stumble upon books side by side that you'd never find anywhere near each other in your typical Barnes and Noble.
+<br><br>
+The feeling reminds me of digging through massive crates of CDs, hunting for new titles.
+<br><br>
+<b>The realization hit me hard.</b>
+<br><br>
+I love getting lost, not like, literally lost, but mentally lost. The sheer number of amazing discoveries and ideas I've encountered after finding books in Librería has been truly exceptional.
+<br><br>
+What I've come to understand is that our capacity for wonder directly shapes how we see the world. When our horizons shrink, so too does the room in which our thoughts can wander leaving our imagination to atrophy like an unused muscle.
+<br><br>
+I don't want my imagination to atrophy, do you?
+<br><br>
+I believe that to keep our minds expansive and alive, we need genuine curiosity. Algorithmic feeds don't drive curiosity, they suffocate it.
+<br><br>
+<b> What value is there in discovery if the path has already been predetermined?</b>
+<br><br>
+A life guided by algorithms would not only be efficient but also predictable and hollow. In the end, it's the wandering that makes the destination worth reaching.
+                    </p>
+                    
+                </section>
+            </article>
+        </div>
+    </div>
+
+            
+    <script>
+        // Script to handle sticky nav visibility
+        document.addEventListener('DOMContentLoaded', function() {
+            const stickyNav = document.getElementById('sticky-nav');
+            
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 100) {
+                    stickyNav.classList.add('opacity-100');
+                    stickyNav.classList.remove('opacity-0');
+                } else {
+                    stickyNav.classList.remove('opacity-100');
+                    stickyNav.classList.add('opacity-0');
+                }
+            });
+        });
+    </script>
+</body>
+</html> 
