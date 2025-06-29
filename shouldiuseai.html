@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="stripe_pk" content="pk_live_51QwRwERp7HbBUe6hyxq9xQ02xXBkFgauiJdA96lrimHyrXDnbOX0Fq7FpxD64uz0htwpqYlFsk3Q6aofWoIlzb4b00WacRh6eW">
+    <meta name="paywall_id" content="prod_SQ7WXxIj1S4IDG">
+    <script src="https://paywall.stripe.com/paywall.js" defer></script>
+    <link rel="icon" href="img/favicon.png" type="image/png">
+    <title>Should I Use AI? - Javier Rivero</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+    <style>
+        /* Smooth fade-in animation specifically for this blog post */
+        @keyframes smoothFadeIn {
+            from { 
+                opacity: 0; 
+                transform: translateY(10px);
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0);
+            }
+        }
+        
+        .fade-in-content {
+            opacity: 0;
+            animation: smoothFadeIn 0.8s ease-out forwards;
+            animation-delay: 0.2s; /* Slight delay for better user experience */
+        }
+
+        /* Mobile-specific styles */
+        @media (max-width: 640px) {
+            .back-link-text {
+                font-size: 0.9rem;
+                display: inline;
+            }
+            
+            .blog-meta {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                text-align: left;
+            }
+            
+            .blog-meta > * {
+                margin-right: 0.5rem;
+                display: inline;
+            }
+        }
+        
+        /* Back link hover effect */
+        .back-link {
+            transition: all 0.2s ease;
+        }
+        
+        .back-link-text {
+            position: relative;
+        }
+        
+        .back-link-text::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: 0;
+            left: 0;
+            background-color: currentColor;
+            transition: width 0.3s ease;
+        }
+        
+        .back-link:hover .back-link-text::after {
+            width: 100%;
+        }
+        
+        /* Remove the default underline */
+        .back-link:hover .back-link-text {
+            text-decoration: none;
+        }
+    </style>
+    <script>
+        // Debug script to ensure sticky nav works
+        window.addEventListener('load', function() {
+            console.log("Window loaded");
+            
+            // Get the sticky nav element
+            const stickyNav = document.getElementById('sticky-nav');
+            
+            if (stickyNav) {
+                console.log("Found sticky nav element");
+                
+                // Add scroll event listener directly here as a backup
+                window.addEventListener('scroll', function() {
+                    const scrollY = window.scrollY || window.pageYOffset;
+                    console.log("Scroll position:", scrollY);
+                    
+                    if (scrollY > 100) {
+                        stickyNav.classList.add('visible');
+                    } else {
+                        stickyNav.classList.remove('visible');
+                    }
+                });
+            }
+        });
+    </script>
+</head>
+<body class="bg-white text-gray-800">
+    <!-- Sticky Navigation Bar - Only visible on scroll -->
+    <nav id="sticky-nav" class="fixed top-0 left-0 w-full z-50 bg-white shadow-sm opacity-0 transition-opacity duration-300">
+        <div class="container mx-auto px-4 py-3 max-w-2xl flex justify-between items-center">
+            <div class="flex items-center">
+                <a href="index.html" class="back-link inline-flex items-center group">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                    </svg>
+                    <span class="back-link-text">Back to Home</span>
+                </a>
+            </div>
+            
+            <!-- Theme Toggle (Right) -->
+            <div class="theme-toggle-container flex rounded-md bg-gray-100 p-0.5">
+                <!-- Light Mode (Sun) -->
+                <button id="light-mode-btn" class="theme-btn flex items-center justify-center rounded-md p-1 transition-all" aria-label="Light Mode">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                    </svg>
+                </button>
+                
+                <!-- Dark Mode (Moon) -->
+                <button id="dark-mode-btn" class="theme-btn flex items-center justify-center rounded-md p-1 transition-all" aria-label="Dark Mode">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="container mx-auto px-8 sm:px-10 pt-6 pb-10 max-w-2xl" id="main-container">
+        <!-- Top Bar with Back Button and Theme Toggle -->
+        <div class="flex justify-between mb-8 sm:mb-12 items-center" id="top-bar">
+            <!-- Back Button (Left) -->
+            <a href="/" class="back-link inline-flex items-center group">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+                <span class="back-link-text">Back to Home</span>
+            </a>
+            
+            <!-- Theme Toggle (Right) -->
+            <div class="theme-toggle-container flex rounded-md bg-gray-100 p-0.5">
+                <!-- Light Mode (Sun) -->
+                <button id="top-light-mode-btn" class="theme-btn flex items-center justify-center rounded-md p-1 transition-all" aria-label="Light Mode">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                    </svg>
+                </button>
+                
+                <!-- Dark Mode (Moon) -->
+                <button id="top-dark-mode-btn" class="theme-btn flex items-center justify-center rounded-md p-1 transition-all" aria-label="Dark Mode">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Blog Post Content - Added fade-in-content class -->
+        <div class="fade-in-content">
+            <!-- Blog Post Header -->
+            <header class="mb-8">
+                <h1 class="text-2xl sm:text-3xl font-bold mb-4 text-left">An Ode To Discovery & Wander</h1>
+                <div class="blog-meta text-gray-500 mb-6 text-sm sm:text-base">
+                    <time datetime="2025-03-15" class="inline">June 29, 2025</time>
+                    <span class="separator mx-2 inline">•</span>
+                    <span class="inline">1 min read</span>
+                </div>
+            </header>
+
+            <!-- Blog Post Content -->
+            <article class="prose prose-lg max-w-none" >
+                <!-- Main content section -->
+                <section class="mb-8">
+                    <p class="mb-4">
+                        One of the most frequent questions I get is, Should I be using AI?<br><br>
+
+What most people don't get is that you can do perfectly fine in a world where your life isn't centered around AI.<br><br>
+
+It's funny to me how reluctant traditional businesses/corporations are to adopt these technologies. "We need to be careful as we adopt these technologies, we never know what can happen," they say, as if other people would be super interested in that weekly report they send over to middle management just for it to get deleted as soon as it hits the senior manager's inbox.<br><br>
+
+It's almost as ridiculous as being afraid of the typewriter when handwriting was still the norm.<br><br>
+
+Let's take photography as another example. When digital cameras first came out, professional photographers swore by film. "Digital will never match the quality of film," they said. "You lose the soul of photography."<br><br>
+
+Fast forward to today, and good luck trying to find a film processing lab in your neighborhood. Last time I wanted to develop a film I had to drive for almost 2 hours just to find "Fotografia Navarro" didn't decide to open that day.<br><br>
+
+Just as with other technologies, complexity shouldn't be the deciding factor when adopting something new.<br><br>
+
+Think about your iPhone — you don't need to understand how millions of transistors work together on the A17 chip, or how it switches between cellular towers while you're driving.<br><br>
+
+You just tap the phone icon, make your call, and complain about how terrible the wifi is at Starbucks.<br><br>
+
+The technical complexity happens behind the scenes, invisible to you as the user.<br><br>
+
+AI sits right next to these examples of technological progress. It's going to be the backbone of 90% of the technology you use in the next three years, built into every gadget and computer interface, <strong>invisible and automatic.</strong><br><br>
+
+And just like any other tool, you need to figure out where it actually helps.<br><br>
+
+Me? Do I want to manually code a website that could take me 100 hours when AI could build one in 30 minutes? Of course not.<br><br>
+
+BUT<br><br>
+
+I'd rather spend 8 hours reading a good old philosophy book than consuming a 5-minute AI summary of Plato's dialogues.<br><br>
+
+(I'm ok with people thinking the exact opposite tho)<br><br>
+
+So instead of asking 'Should I use AI?' ask yourself: What parts of my day would I prefer technology handle versus what parts do I want to spend my focus and attention on? The answer will be different for everyone, and it'll probably change depending on what you're dealing with that day<br><br>
+
+Because I think real power isn't found in adopting every new, fancy technology. No, I believe it's in the conscious choice to build a life where technology amplifies your humanity, not replaces it
+                    </p>
+                    
+                </section>
+            </article>
+        </div>
+    </div>
+
+            
+    <script>
+        // Script to handle sticky nav visibility
+        document.addEventListener('DOMContentLoaded', function() {
+            const stickyNav = document.getElementById('sticky-nav');
+            
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 100) {
+                    stickyNav.classList.add('opacity-100');
+                    stickyNav.classList.remove('opacity-0');
+                } else {
+                    stickyNav.classList.remove('opacity-100');
+                    stickyNav.classList.add('opacity-0');
+                }
+            });
+        });
+    </script>
+</body>
+</html> 
