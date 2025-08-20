@@ -429,7 +429,7 @@ body.dark-mode .text-blue-600 {
 .company-arrow {
   text-decoration: none !important;
   padding-right: 0 !important;
-  margin-left: 0.25rem;
+  
   display: inline-block;
   color: #0000ff !important;
   transition: transform 0.2s ease, opacity 0.2s ease;
