@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="stripe_pk" content="pk_live_51QwRwERp7HbBUe6hyxq9xQ02xXBkFgauiJdA96lrimHyrXDnbOX0Fq7FpxD64uz0htwpqYlFsk3Q6aofWoIlzb4b00WacRh6eW">
+    <meta name="paywall_id" content="prod_SQ7WXxIj1S4IDG">
+    <script src="https://paywall.stripe.com/paywall.js" defer></script>
+    <link rel="icon" href="img/favicon.png" type="image/png">
+    <title>Why Intelligence Is Not Artificial - Javier Rivero</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+    <style>
+        /* Smooth fade-in animation specifically for this blog post */
+        @keyframes smoothFadeIn {
+            from { 
+                opacity: 0; 
+                transform: translateY(10px);
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0);
+            }
+        }
+        
+        .fade-in-content {
+            opacity: 0;
+            animation: smoothFadeIn 0.8s ease-out forwards;
+            animation-delay: 0.2s; /* Slight delay for better user experience */
+        }
+
+        /* Mobile-specific styles */
+        @media (max-width: 640px) {
+            .back-link-text {
+                font-size: 0.9rem;
+                display: inline;
+            }
+            
+            .blog-meta {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                text-align: left;
+            }
+            
+            .blog-meta > * {
+                margin-right: 0.5rem;
+                display: inline;
+            }
+        }
+        
+        /* Back link hover effect */
+        .back-link {
+            transition: all 0.2s ease;
+        }
+        
+        .back-link-text {
+            position: relative;
+        }
+        
+        .back-link-text::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: 0;
+            left: 0;
+            background-color: currentColor;
+            transition: width 0.3s ease;
+        }
+        
+        .back-link:hover .back-link-text::after {
+            width: 100%;
+        }
+        
+        /* Remove the default underline */
+        .back-link:hover .back-link-text {
+            text-decoration: none;
+        }
+    </style>
+    <script>
+        // Debug script to ensure sticky nav works
+        window.addEventListener('load', function() {
+            console.log("Window loaded");
+            
+            // Get the sticky nav element
+            const stickyNav = document.getElementById('sticky-nav');
+            
+            if (stickyNav) {
+                console.log("Found sticky nav element");
+                
+                // Add scroll event listener directly here as a backup
+                window.addEventListener('scroll', function() {
+                    const scrollY = window.scrollY || window.pageYOffset;
+                    console.log("Scroll position:", scrollY);
+                    
+                    if (scrollY > 100) {
+                        stickyNav.classList.add('visible');
+                    } else {
+                        stickyNav.classList.remove('visible');
+                    }
+                });
+            }
+        });
+    </script>
+</head>
+<body class="bg-white text-gray-800">
+    <!-- Sticky Navigation Bar - Only visible on scroll -->
+    <nav id="sticky-nav" class="fixed top-0 left-0 w-full z-50 bg-white shadow-sm opacity-0 transition-opacity duration-300">
+        <div class="container mx-auto px-4 py-3 max-w-2xl flex justify-between items-center">
+            <div class="flex items-center">
+                <a href="index.html" class="back-link inline-flex items-center group">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                    </svg>
+                    <span class="back-link-text">Back to Home</span>
+                </a>
+            </div>
+            <div class="flex items-center">
+                <!-- Theme Toggle (Right) -->
+                <div class="theme-toggle-container flex rounded-md bg-gray-100 p-0.5">
+                    <!-- Light Mode (Sun) -->
+                    <button id="light-mode-btn" class="theme-btn flex items-center justify-center rounded-md p-1 transition-all" aria-label="Light Mode">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                        </svg>
+                    </button>
+                    <!-- Dark Mode (Moon) -->
+                    <button id="dark-mode-btn" class="theme-btn flex items-center justify-center rounded-md p-1 transition-all" aria-label="Dark Mode">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="container mx-auto px-8 sm:px-10 pt-6 pb-10 max-w-2xl" id="main-container">
+        <!-- Top Bar with Back Button and Theme Toggle -->
+        <div class="flex justify-between mb-8 sm:mb-12 items-center" id="top-bar">
+            <!-- Back Button (Left) -->
+            <a href="index.html" class="back-link inline-flex items-center group">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+                <span class="back-link-text">Back to Home</span>
+            </a>
+            
+            <!-- Theme Toggle (Right) -->
+            <div class="flex items-center">
+                <div class="theme-toggle-container flex rounded-md bg-gray-100 p-0.5">
+                    <!-- Light Mode (Sun) -->
+                    <button id="top-light-mode-btn" class="theme-btn flex items-center justify-center rounded-md p-1 transition-all" aria-label="Light Mode">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                        </svg>
+                    </button>
+                    
+                    <!-- Dark Mode (Moon) -->
+                    <button id="top-dark-mode-btn" class="theme-btn flex items-center justify-center rounded-md p-1 transition-all" aria-label="Dark Mode">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Blog Post Content - Added fade-in-content class -->
+        <div class="fade-in-content">
+            <!-- Blog Post Header -->
+            <header class="mb-8">
+                <h1 class="text-2xl sm:text-3xl font-bold mb-4 text-left">
+                    <span class="lang-en">Why Intelligence Is Not Artificial</span>
+                    <span class="lang-es" style="display:none">Por qué la inteligencia no es artificial</span>
+                </h1>
+                <div class="blog-meta text-gray-500 mb-6 text-sm sm:text-base">
+                    <div class="lang-en">
+                        <time datetime="2025-11-06" class="inline">November 6, 2025</time>
+                        <span class="separator mx-2 inline">•</span>
+                        <span class="inline">4 min read</span>
+                    </div>
+                    <div class="lang-es" style="display:none">
+                        <time datetime="2025-11-06" class="inline">6 de noviembre de 2025</time>
+                        <span class="separator mx-2 inline">•</span>
+                        <span class="inline">4 min de lectura</span>
+                    </div>
+                </div>
+
+                <!-- Language Toggle -->
+                <div class="flex justify-start my-4">
+                    <div class="language-toggle-container">
+                        <button id="lang-en-btn-main" class="lang-btn text-sm font-normal text-gray-500 hover:text-gray-800 transition-colors duration-200">English</button>
+                        <span class="text-gray-400 mx-1">/</span>
+                        <button id="lang-es-btn-main" class="lang-btn text-sm font-normal text-gray-500 hover:text-gray-800 transition-colors duration-200">Español</button>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Blog Post Content -->
+            <article class="prose prose-lg max-w-none" >
+                <!-- Main content section -->
+                <section class="mb-8">
+                    <div class="lang-en">
+                        <p class="mb-4">
+                            I just realized that one of the oldest PR and marketing disasters dates back to Epicurus, the Greek philosopher who developed Epicureanism: the philosophy that holds that pleasure is the supreme good and that happiness is achieved through moderation and the absence of pain.<br><br>
+
+                            It's easy to understand why this leads to associating Epicureanism with the hedonistic pursuit of pleasure. But this interpretation broadly distorts what Epicurus actually proposed.<br><br>
+
+                            What he advocated for wasn't the unbridled pursuit of pleasure, but rather achieving a state of absence of pain (aponia) and imperturbability (ataraxia): a vast difference from mere pleasure.<br><br>
+
+                            In one of his letters, Epicurus (tries to) clarify the misunderstanding:<br><br>
+
+                            <em>"When we say that pleasure is the end and aim, we do not mean the pleasures of the prodigal or the pleasures of sensuality, as some understand us through ignorance, prejudice, or willful misrepresentation."</em><br><br>
+
+                            I think if Epicurus had chosen the word imperturbability (ataraxia) instead of pleasure (hedoné), his philosophy would have had greater impact in competition with Stoicism.<br><br>
+
+                            It would have been less catchy, though.<br><br>
+
+                            Two thousand years later, we're making exactly the same mistake with artificial intelligence.<br><br>
+
+                            Just as "pleasure" betrayed Epicurus's intentions, "artificial" betrays the nature of this incredible technology.<br><br>
+
+                            I've noticed that people associate "artificial" with the fake, the inferior, the non-human.<br><br>
+
+                            It generates instinctive rejection, as if the technology were an impostor rather than a tool built with our own wisdom.<br><br>
+
+                            A parallel I always use as an example with friends: the word "organic" makes a product with no nutritional advantage be perceived as superior, when really the only difference lies in the cultivation process.<br><br>
+
+                            Similarly, "artificial" poisons the perception of a profoundly human technology.<br><br>
+
+                            I'm convinced that we've committed one of the most serious mistakes of this era: calling an intelligence that is <strong>collective</strong> artificial.<br><br>
+
+                            The capability of language models lies in the human knowledge they've processed.<br><br>
+
+                            This intelligence is an aggregation of knowledge built collaboratively throughout history and documented digitally in recent decades.<br><br>
+
+                            The information it provides is not artificial, it's collective: the result of centuries of people who questioned their environment and documented their discoveries.<br><br>
+
+                            The consolidation of this knowledge into a universally accessible technology is, I think, an act of love toward humanity: democratizing the accumulated wisdom of generations.<br><br>
+
+                            Just as Epicurus couldn't rescue his philosophy from linguistic misunderstanding, I want to believe that we're still in time to correct our error.<br><br>
+
+                            Calling this technology "collective intelligence" isn't a semantic whim, it's honestly recognizing what it is: humanity speaking to itself across time.
+                        </p>
+                    </div>
+                    <div class="lang-es" style="display:none">
+                        <p class="mb-4">
+                            Recién caí en cuenta que uno de los desastres de PR y Marketing más antiguos se remonta a Epicuro, filósofo griego que desarrolló el epicureísmo: la filosofía que sostiene que el placer es el bien supremo y que la felicidad se alcanza a través de la moderación y la ausencia de dolor.<br><br>
+
+                            Es fácil entender por qué esto lleva a asociar el epicureísmo con la búsqueda hedonista del placer. Pero esta interpretación distorsiona ampliamente lo que Epicuro proponía.<br><br>
+
+                            Lo que él defendía no era la búsqueda desenfrenada de placer, sino alcanzar un estado de ausencia de dolor (aponía) y de imperturbabilidad (ataraxia): gran diferencia vs placer.<br><br>
+
+                            En una de sus cartas, Epicuro (trata de) aclarar el malentendido:<br><br>
+
+                            <em>"Cuando decimos que el placer es el fin y objetivo, no nos referimos a los placeres del pródigo o los placeres de la sensualidad, como algunos nos entienden por ignorancia, prejuicio o tergiversación deliberada."</em><br><br>
+
+                            Creo que si Epicuro hubiera elegido la palabra imperturbabilidad (ataraxia) en vez de placer (hedoné), su filosofía habría tenido mayor impacto en competición con el estoicismo.<br><br>
+
+                            Hubiera sido menos catchy, eso sí.<br><br>
+
+                            Dos mil años después, cometemos exactamente el mismo error con la inteligencia artificial.<br><br>
+
+                            Al igual que "placer" traicionó las intenciones de Epicuro, "artificial" traiciona la naturaleza de esta increíble tecnología.<br><br>
+
+                            He notado que la gente asocia "Artificial" con lo falso, lo inferior, lo no-humano.<br><br>
+
+                            Genera rechazo instintivo, como si la tecnología fuera un impostor en lugar de una herramienta construida con nuestra propia sabiduría.<br><br>
+
+                            Un paralelismo que siempre uso como ejemplo con amigos: la palabra "orgánico" hace que un producto sin ventaja nutricional se perciba como superior, cuando realmente la única diferencia radica en el proceso de cultivo.<br><br>
+
+                            Del mismo modo, artificial "envenena" la percepción de una tecnología profundamente humana.<br><br>
+
+                            Estoy convencido de que hemos cometido uno de los errores más graves de esta época: llamar artificial a una inteligencia que es <strong>colectiva</strong>.<br><br>
+
+                            La capacidad de los modelos de lenguaje radica en el conocimiento humano que han procesado.<br><br>
+
+                            Esta inteligencia es una agrupación del saber construido colaborativamente a través de la historia y documentado digitalmente en las últimas décadas.<br><br>
+
+                            La información que provee no es artificial, es colectiva: el resultado de siglos de personas que cuestionaron su entorno y documentaron sus descubrimientos.<br><br>
+
+                            La consolidación de este conocimiento en una tecnología accesible universalmente pienso que es un acto de amor hacia la humanidad: democratizar el saber acumulado de generaciones.<br><br>
+
+                            Así como Epicuro no pudo rescatar su filosofía del malentendido lingüístico, quiero creer que todavía estamos a tiempo de corregir nuestro error.<br><br>
+
+                            Llamar a esta tecnología "inteligencia colectiva" no es un capricho semántico, es reconocer honestamente lo que es: la humanidad hablándose a sí misma a través del tiempo.
+                        </p>
+                    </div>
+                </section>
+            </article>
+        </div>
+    </div>
+
+            
+    <script>
+        // Script to handle sticky nav visibility
+        document.addEventListener('DOMContentLoaded', function() {
+            const stickyNav = document.getElementById('sticky-nav');
+            
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 100) {
+                    stickyNav.classList.add('opacity-100');
+                    stickyNav.classList.remove('opacity-0');
+                } else {
+                    stickyNav.classList.remove('opacity-100');
+                    stickyNav.classList.add('opacity-0');
+                }
+            });
+        });
+    </script>
+     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const langEnButton = document.getElementById('lang-en-btn-main');
+            const langEsButton = document.getElementById('lang-es-btn-main');
+            const enElements = document.querySelectorAll('.lang-en');
+            const esElements = document.querySelectorAll('.lang-es');
+
+            function setLanguage(lang) {
+                if (lang === 'es') {
+                    enElements.forEach(el => el.style.display = 'none');
+                    esElements.forEach(el => el.style.display = 'block');
+                    
+                    langEnButton.classList.remove('font-bold', 'text-gray-800');
+                    langEnButton.classList.add('font-normal', 'text-gray-500');
+                    
+                    langEsButton.classList.remove('font-normal', 'text-gray-500');
+                    langEsButton.classList.add('font-bold', 'text-gray-800');
+
+                    localStorage.setItem('language', 'es');
+                } else {
+                    esElements.forEach(el => el.style.display = 'none');
+                    enElements.forEach(el => el.style.display = 'block');
+
+                    langEsButton.classList.remove('font-bold', 'text-gray-800');
+                    langEsButton.classList.add('font-normal', 'text-gray-500');
+
+                    langEnButton.classList.remove('font-normal', 'text-gray-500');
+                    langEnButton.classList.add('font-bold', 'text-gray-800');
+                    
+                    localStorage.setItem('language', 'en');
+                }
+            }
+
+            langEnButton.addEventListener('click', () => setLanguage('en'));
+            langEsButton.addEventListener('click', () => setLanguage('es'));
+
+            // Set initial language
+            const savedLang = localStorage.getItem('language');
+            setLanguage(savedLang || 'en'); // Default to English
+        });
+    </script>
+</body>
+</html>
+
