@@ -3,12 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Removed Stripe paywall tags as they weren't in the original good-memories.html -->
     <link rel="icon" href="img/favicon.png" type="image/png">
     <title>Good Memories - Javier Rivero</title>
     <script src="https://cdn.tailwindcss.com"></script>
     
     <link rel="stylesheet" href="styles.css">
     <script src="script.js" defer></script>
+    <style>
+        /* Smooth fade-in animation specifically for this blog post */
+        @keyframes smoothFadeIn {
+            from { 
+                opacity: 0; 
+                transform: translateY(10px);
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0);
+            }
+        }
+        
+        .fade-in-content {
+            opacity: 0;
+            animation: smoothFadeIn 0.8s ease-out forwards;
+            animation-delay: 0.2s; /* Slight delay for better user experience */
+        }
+
+        /* Mobile-specific styles */
+        @media (max-width: 640px) {
+            .back-link-text {
+                font-size: 0.9rem;
+                display: inline;
+            }
+            
+            .blog-meta {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                text-align: left;
+            }
+            
+            .blog-meta > * {
+                margin-right: 0.5rem;
+                display: inline;
+            }
+        }
+        
+        /* Back link hover effect */
+        .back-link {
+            transition: all 0.2s ease;
+        }
+        
+        .back-link-text {
+            position: relative;
+        }
+        
+        .back-link-text::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: 0;
+            left: 0;
+            background-color: currentColor;
+            transition: width 0.3s ease;
+        }
+        
+        .back-link:hover .back-link-text::after {
+            width: 100%;
+        }
+        
+        /* Remove the default underline */
+        .back-link:hover .back-link-text {
+            text-decoration: none;
+        }
+    </style>
     <script>
         // Debug script to ensure sticky nav works
         window.addEventListener('load', function() {
@@ -36,168 +105,162 @@
     </script>
 </head>
 <body class="bg-white text-gray-800">
-    <!-- Sticky Navigation Bar -->
-    <nav id="sticky-nav" class="fixed top-0 left-0 w-full z-50">
+    <!-- Sticky Navigation Bar - Only visible on scroll -->
+    <nav id="sticky-nav" class="fixed top-0 left-0 w-full z-50 bg-white shadow-sm opacity-0 transition-opacity duration-300">
         <div class="container mx-auto px-4 py-3 max-w-2xl flex justify-between items-center">
             <div class="flex items-center">
-                <a href="index.html" class="back-link flex items-center gap-2 group">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <a href="index.html" class="back-link inline-flex items-center group">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
                     </svg>
-                    <span class="back-link-text">
-                        Back to Home
-                        <span></span>
-                    </span>
+                    <span class="back-link-text">Back to Home</span>
                 </a>
             </div>
-            
-            <!-- Theme Toggle (Right) -->
-            <div class="theme-toggle-container flex rounded-md bg-gray-100 p-0.5 scale-90">
-                <!-- Light Mode (Sun) -->
-                <button id="light-mode-btn" class="theme-btn flex items-center justify-center rounded-md p-1 transition-all" aria-label="Light Mode">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-                    </svg>
-                </button>
-                
-                <!-- Dark Mode (Moon) -->
-                <button id="dark-mode-btn" class="theme-btn flex items-center justify-center rounded-md p-1 transition-all" aria-label="Dark Mode">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-                    </svg>
-                </button>
+            <div class="flex items-center">
+                <!-- Theme Toggle (Right) -->
+                <div class="theme-toggle-container flex rounded-md bg-gray-100 p-0.5">
+                    <!-- Light Mode (Sun) -->
+                    <button id="light-mode-btn" class="theme-btn flex items-center justify-center rounded-md p-1 transition-all" aria-label="Light Mode">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                        </svg>
+                    </button>
+                    <!-- Dark Mode (Moon) -->
+                    <button id="dark-mode-btn" class="theme-btn flex items-center justify-center rounded-md p-1 transition-all" aria-label="Dark Mode">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                        </svg>
+                    </button>
+                </div>
             </div>
         </div>
     </nav>
-
-    <div class="container mx-auto px-6 pt-6 pb-12 max-w-2xl" id="main-container">
+    
+    <div class="container mx-auto px-8 sm:px-10 pt-6 pb-10 max-w-2xl" id="main-container">
         <!-- Top Bar with Back Button and Theme Toggle -->
-        <div class="flex justify-between mb-12 items-center" id="top-bar">
+        <div class="flex justify-between mb-8 sm:mb-12 items-center" id="top-bar">
             <!-- Back Button (Left) -->
-            <a href="index.html" class="back-link flex items-center gap-2 group">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <a href="index.html" class="back-link inline-flex items-center group">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
                 </svg>
-                <span class="back-link-text">
-                    Back to Home
-                    <span></span>
-                </span>
+                <span class="back-link-text">Back to Home</span>
             </a>
             
             <!-- Theme Toggle (Right) -->
-            <div class="theme-toggle-container flex rounded-md bg-gray-100 p-0.5 scale-90">
-                <!-- Light Mode (Sun) -->
-                <button id="top-light-mode-btn" class="theme-btn flex items-center justify-center rounded-md p-1 transition-all" aria-label="Light Mode">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-                    </svg>
-                </button>
-                
-                <!-- Dark Mode (Moon) -->
-                <button id="top-dark-mode-btn" class="theme-btn flex items-center justify-center rounded-md p-1 transition-all" aria-label="Dark Mode">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-                    </svg>
-                </button>
+            <div class="flex items-center">
+                <div class="theme-toggle-container flex rounded-md bg-gray-100 p-0.5">
+                    <!-- Light Mode (Sun) -->
+                    <button id="top-light-mode-btn" class="theme-btn flex items-center justify-center rounded-md p-1 transition-all" aria-label="Light Mode">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                        </svg>
+                    </button>
+                    
+                    <!-- Dark Mode (Moon) -->
+                    <button id="top-dark-mode-btn" class="theme-btn flex items-center justify-center rounded-md p-1 transition-all" aria-label="Dark Mode">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                        </svg>
+                    </button>
+                </div>
             </div>
         </div>
 
-        <!-- Blog Post Header -->
-        <header class="mb-8">
-            <h1 class="text-3xl font-bold mb-2">Good Memories</h1>
-            <div class="flex items-center text-gray-500 mb-4">
-                <time datetime="2025-12-29">December 29, 2025</time>
-                <span class="mx-2">•</span>
-                <span>2 min read</span>
-            </div>
-        </header>
+        <!-- Blog Post Content - Added fade-in-content class -->
+        <div class="fade-in-content">
+            <!-- Blog Post Header -->
+            <header class="mb-8">
+                <h1 class="text-2xl sm:text-3xl font-bold mb-4 text-left">
+                    <span class="lang-en">Good Memories</span>
+                </h1>
+                <div class="blog-meta text-gray-500 mb-6 text-sm sm:text-base">
+                    <div class="lang-en">
+                        <time datetime="2025-12-29" class="inline">December 29, 2025</time>
+                        <span class="separator mx-2 inline">•</span>
+                        <span class="inline">2 min read</span>
+                    </div>
+                </div>
+            </header>
 
-        <!-- Blog Post Content -->
-        <article class="prose prose-lg max-w-none">
-            <!-- Main content section -->
-            <section class="mb-8">
-                <p class="mb-4">
-                    As I looked back this year, I noticed I had a lot of good moments that transformed into very happy memories. But strangely, I felt an unsettling emotion that was closer to grief than it was to joy.
-                </p>
-                <p class="mb-4">
-                    Just scrolling through my camera roll and listing my highlights for the year hit me with a deep sense of nostalgia, the kind that lingers and eventually transforms into sorrow.
-                </p>
-                <p class="mb-4">
-                    How can I let such extraordinary, unique, and wholesome memories turn into something so melancholic? Why am I letting the sweetest fruits of memory rot into bitterness?
-                </p>
-                <p class="mb-4">
-                    After a few days of circling with this question, I finally understood my own (flawed) reasoning: Given that good memories produce nostalgia, and nostalgia is characterized by sadness, it necessarily follows that good memories produce sadness.
-                </p>
-                <p class="mb-4">
-                    So, I’m redefining how I think about good memories.
-                </p>
-                <p class="mb-4">
-                    I think good memories should be talked about often—not just in private contemplation, but in open celebration. By returning to the small details that made a moment special, we strengthen the experience itself. Just as exercise nourishes the body, rehearsing these moments fortifies the mind, allowing past joys to shape us in ways we couldn't have anticipated when we first lived them.
-                </p>
-                <p class="mb-4">
-                    I want to find myself continuously smiling without realizing it, caught off guard by my own recollections. That is when I’ll understand that the real purpose of these moments was to help shape us.
-                </p>
-                <p class="mb-4">
-                    To build our identities.
-                </p>
-                <p class="mb-4">
-                    I want to continuously say that I am who I am today because of how good life has been to me. I am a whole and content person who contains a multitude of magnificent experiences.
-                </p>
-                <p class="mb-4">
-                    New experiences won’t be the same–that I know, but I won’t be the same either.
-                </p>
-                <p class="mb-4">
-                    I’ll be the result of these good memories.
-                </p>
-                <p class="mb-4">
-                    As Seneca said, <i>"Let us cease grieving but persevere in remembering."</i>
-                </p>
-            </section>
-        </article>
+            <!-- Blog Post Content -->
+            <article class="prose prose-lg max-w-none" >
+                <!-- Main content section -->
+                <section class="mb-8">
+                    <div class="lang-en">
+                        <p class="mb-4">
+                            As I looked back this year, I noticed I had a lot of good moments that transformed into very happy memories. But strangely, I felt an unsettling emotion that was closer to grief than it was to joy.
+                        </p>
+                        <p class="mb-4">
+                            Just scrolling through my camera roll and listing my highlights for the year hit me with a deep sense of nostalgia, the kind that lingers and eventually transforms into sorrow.
+                        </p>
+                        <p class="mb-4">
+                            How can I let such extraordinary, unique, and wholesome memories turn into something so melancholic? Why am I letting the sweetest fruits of memory rot into bitterness?
+                        </p>
+                        <p class="mb-4">
+                            After a few days of circling with this question, I finally understood my own (flawed) reasoning: Given that good memories produce nostalgia, and nostalgia is characterized by sadness, it necessarily follows that good memories produce sadness.
+                        </p>
+                        <p class="mb-4">
+                            So, I’m redefining how I think about good memories.
+                        </p>
+                        <p class="mb-4">
+                            I think good memories should be talked about often—not just in private contemplation, but in open celebration. By returning to the small details that made a moment special, we strengthen the experience itself. Just as exercise nourishes the body, rehearsing these moments fortifies the mind, allowing past joys to shape us in ways we couldn't have anticipated when we first lived them.
+                        </p>
+                        <p class="mb-4">
+                            I want to find myself continuously smiling without realizing it, caught off guard by my own recollections. That is when I’ll understand that the real purpose of these moments was to help shape us.
+                        </p>
+                        <p class="mb-4">
+                            To build our identities.
+                        </p>
+                        <p class="mb-4">
+                            I want to continuously say that I am who I am today because of how good life has been to me. I am a whole and content person who contains a multitude of magnificent experiences.
+                        </p>
+                        <p class="mb-4">
+                            New experiences won’t be the same–that I know, but I won’t be the same either.
+                        </p>
+                        <p class="mb-4">
+                            I’ll be the result of these good memories.
+                        </p>
+                        <p class="mb-4">
+                            As Seneca said, <i>"Let us cease grieving but persevere in remembering."</i>
+                        </p>
+                    </div>
+                </section>
+            </article>
 
-        
-        <!-- Related Posts -->
-        <div class="border-t border-gray-200 pt-8 mt-8">
-            <h3 class="text-xl font-bold mb-4">Related Posts</h3>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <a href="shouldiuseai.html" class="block p-4 border border-gray-200 rounded-lg hover:shadow-md transition-shadow">
-                    <h4 class="font-bold mb-2">Should I Use AI?</h4>
-                    <p class="text-gray-600">One of the most frequent questions I get is, Should I be using AI?...</p>
-                </a>
-                <a href="on-identity.html" class="block p-4 border border-gray-200 rounded-lg hover:shadow-md transition-shadow">
-                    <h4 class="font-bold mb-2">On Identity</h4>
-                    <p class="text-gray-600">Reflections on what makes us who we are...</p>
-                </a>
+            <!-- Similar Entries Section -->
+            <div class="mt-12 pt-8 border-t border-gray-100">
+                <h3 class="text-sm text-gray-400 mb-4">Similar entries</h3>
+                <div class="flex flex-col space-y-3">
+                    <a href="odetodiscovery.html" class="group inline-flex items-center gap-1 text-gray-600 hover:text-blue-600 transition-colors">
+                        An Ode to Discovery & Wander
+                        <span class="text-blue-600 opacity-0 group-hover:opacity-100 transition-opacity transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
+                    </a>
+                    <a href="on-identity.html" class="group inline-flex items-center gap-1 text-gray-600 hover:text-blue-600 transition-colors">
+                        On Identity
+                        <span class="text-blue-600 opacity-0 group-hover:opacity-100 transition-opacity transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- Footer -->
-    <footer class="bg-gray-100 py-8 mt-12">
-        <div class="container mx-auto px-6 max-w-2xl">
-            <div class="flex flex-col md:flex-row justify-between items-center">
-                <div class="mb-4 md:mb-0">
-                    <p class="text-gray-600">© 2025 Javier Rivero. All rights reserved.</p>
-                </div>
-                <div class="flex space-x-4">
-                    <a href="https://www.linkedin.com/in/javierriveroe/" target="_blank" class="text-gray-400 hover:text-gray-600">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-                        </svg>
-                    </a>
-                    <a href="mailto:josejavier.re@gmail.com" class="text-gray-400 hover:text-gray-600">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                            <polyline points="22,6 12,13 2,6"></polyline>
-                        </svg>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </footer>
-
+            
     <script>
-        // Additional blog-specific JavaScript can go here
+        // Script to handle sticky nav visibility
+        document.addEventListener('DOMContentLoaded', function() {
+            const stickyNav = document.getElementById('sticky-nav');
+            
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 100) {
+                    stickyNav.classList.add('opacity-100');
+                    stickyNav.classList.remove('opacity-0');
+                } else {
+                    stickyNav.classList.remove('opacity-100');
+                    stickyNav.classList.add('opacity-0');
+                }
+            });
+        });
     </script>
 </body>
 </html>
