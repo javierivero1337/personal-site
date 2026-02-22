@@ -36,7 +36,7 @@ a:hover {
 }
 
 /* Text links styling */
-a[href]:not(#sticky-nav a, #top-socials a, .company-arrow, #projects a,footer a, #blog a) {
+a[href]:not(#sticky-nav a, #top-socials a, .company-arrow, #projects a, footer a, #blog a, #experience a) {
   color: #0000ff;
   text-decoration: underline;
   position: relative;
@@ -44,7 +44,7 @@ a[href]:not(#sticky-nav a, #top-socials a, .company-arrow, #projects a,footer a,
 
 
 /* Dark mode link styling */
-body.dark-mode a[href]:not(#sticky-nav a, #top-socials a, #projects a,footer a, .company-arrow, #blog a) {
+body.dark-mode a[href]:not(#sticky-nav a, #top-socials a, #projects a, footer a, .company-arrow, #blog a, #experience a) {
   color: #60a5fa; /* Tailwind blue-400 */
 }
 
@@ -513,27 +513,29 @@ body.dark-mode .back-link-text span {
   content: none !important;
 }
 
-/* Blog and Projects section specific link styling */
-#blog a, #projects a {
+/* Blog, Projects, and Experience section specific link styling */
+#blog a, #projects a, #experience a {
   color: inherit !important;
   text-decoration: none !important;
   transition: all 0.3s ease;
   position: relative;
 }
 
-#blog a:hover, #projects a:hover {
+#blog a:hover, #projects a:hover, #experience a:hover {
   color: #0000ff !important;
 }
 
-/* Add the sliding underline effect to blog and projects links */
+/* Add the sliding underline effect to blog, projects, and experience links */
 #blog a .text-blue-600,
-#projects a .text-blue-600 {
+#projects a .text-blue-600,
+#experience a .text-blue-600 {
   color: #0000ff !important;
 }
 
-/* Create the sliding underline for blog and projects links */
+/* Create the sliding underline for blog, projects, and experience links */
 #blog a:not(.back-link):not([class*="company-arrow"]):after,
-#projects a:not(.back-link):not([class*="company-arrow"]):after {
+#projects a:not(.back-link):not([class*="company-arrow"]):after,
+#experience a:not(.back-link):not([class*="company-arrow"]):after {
   content: '' !important;
   position: absolute;
   bottom: -2px;
@@ -547,27 +549,31 @@ body.dark-mode .back-link-text span {
 }
 
 #blog a:not(.back-link):not([class*="company-arrow"]):hover:after,
-#projects a:not(.back-link):not([class*="company-arrow"]):hover:after {
+#projects a:not(.back-link):not([class*="company-arrow"]):hover:after,
+#experience a:not(.back-link):not([class*="company-arrow"]):hover:after {
   transform: scaleX(1);
 }
 
 body.dark-mode #blog a:hover, 
-body.dark-mode #projects a:hover {
+body.dark-mode #projects a:hover,
+body.dark-mode #experience a:hover {
   color: #60a5fa !important;
 }
 
 body.dark-mode #blog a:not(.back-link):not([class*="company-arrow"]):after,
-body.dark-mode #projects a:not(.back-link):not([class*="company-arrow"]):after {
+body.dark-mode #projects a:not(.back-link):not([class*="company-arrow"]):after,
+body.dark-mode #experience a:not(.back-link):not([class*="company-arrow"]):after {
   background-color: #60a5fa !important;
 }
 
 body.dark-mode #blog a .text-blue-600,
-body.dark-mode #projects a .text-blue-600 {
+body.dark-mode #projects a .text-blue-600,
+body.dark-mode #experience a .text-blue-600 {
   color: #60a5fa !important;
 }
 
-/* Remove the translateY effect from blog and projects links */
-#blog a:hover, #projects a:hover {
+/* Remove the translateY effect from blog, projects, and experience links */
+#blog a:hover, #projects a:hover, #experience a:hover {
   transform: none;
 }
 
