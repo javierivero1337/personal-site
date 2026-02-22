@@ -91,19 +91,24 @@ document.addEventListener('DOMContentLoaded', function() {
     // Theme toggle with segmented control
     const lightModeBtn = document.getElementById('light-mode-btn');
     const darkModeBtn = document.getElementById('dark-mode-btn');
-    const themeButtons = [lightModeBtn, darkModeBtn];
+    const codeModeBtn = document.getElementById('code-mode-btn');
+    const themeButtons = [lightModeBtn, darkModeBtn, codeModeBtn];
     
     // Top theme toggle buttons
     const topLightModeBtn = document.getElementById('top-light-mode-btn');
     const topDarkModeBtn = document.getElementById('top-dark-mode-btn');
-    const topThemeButtons = [topLightModeBtn, topDarkModeBtn];
+    const topCodeModeBtn = document.getElementById('top-code-mode-btn');
+    const topThemeButtons = [topLightModeBtn, topDarkModeBtn, topCodeModeBtn];
     
     // Mobile menu theme toggle buttons
     const mobileLightModeBtn = document.getElementById('mobile-light-mode-btn');
     const mobileDarkModeBtn = document.getElementById('mobile-dark-mode-btn');
-    const mobileThemeButtons = mobileLightModeBtn && mobileDarkModeBtn ? [mobileLightModeBtn, mobileDarkModeBtn] : [];
+    const mobileCodeModeBtn = document.getElementById('mobile-code-mode-btn');
+    const mobileThemeButtons = mobileLightModeBtn && mobileDarkModeBtn && mobileCodeModeBtn
+        ? [mobileLightModeBtn, mobileDarkModeBtn, mobileCodeModeBtn]
+        : [];
     
-    if (lightModeBtn && darkModeBtn && topLightModeBtn && topDarkModeBtn) {
+    if (lightModeBtn && darkModeBtn && codeModeBtn && topLightModeBtn && topDarkModeBtn && topCodeModeBtn) {
         
         // Function to update active button
         const setActiveThemeButton = (theme) => {
@@ -127,6 +132,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 darkModeBtn.classList.add('active');
                 topDarkModeBtn.classList.add('active');
                 if (mobileDarkModeBtn) mobileDarkModeBtn.classList.add('active');
+            } else if (theme === 'code') {
+                codeModeBtn.classList.add('active');
+                topCodeModeBtn.classList.add('active');
+                if (mobileCodeModeBtn) mobileCodeModeBtn.classList.add('active');
             }
         };
 
@@ -134,9 +143,18 @@ document.addEventListener('DOMContentLoaded', function() {
         const applyTheme = (theme) => {
             if (theme === 'dark') {
                 document.body.classList.add('dark-mode');
+                document.body.classList.remove('code-mode');
+                document.documentElement.classList.remove('code-mode');
                 setActiveThemeButton('dark');
+            } else if (theme === 'code') {
+                document.body.classList.remove('dark-mode');
+                document.body.classList.add('code-mode');
+                document.documentElement.classList.add('code-mode');
+                setActiveThemeButton('code');
             } else {
                 document.body.classList.remove('dark-mode');
+                document.body.classList.remove('code-mode');
+                document.documentElement.classList.remove('code-mode');
                 setActiveThemeButton('light');
             }
         };
@@ -155,6 +173,11 @@ document.addEventListener('DOMContentLoaded', function() {
             localStorage.setItem('theme', 'dark');
             applyTheme('dark');
         });
+
+        codeModeBtn.addEventListener('click', function() {
+            localStorage.setItem('theme', 'code');
+            applyTheme('code');
+        });
         
         // Add event listeners for top theme buttons
         topLightModeBtn.addEventListener('click', function() {
@@ -165,6 +188,11 @@ document.addEventListener('DOMContentLoaded', function() {
         topDarkModeBtn.addEventListener('click', function() {
             localStorage.setItem('theme', 'dark');
             applyTheme('dark');
+        });
+
+        topCodeModeBtn.addEventListener('click', function() {
+            localStorage.setItem('theme', 'code');
+            applyTheme('code');
         });
         
         // Add event listeners for mobile menu theme buttons
@@ -179,6 +207,13 @@ document.addEventListener('DOMContentLoaded', function() {
             mobileDarkModeBtn.addEventListener('click', function() {
                 localStorage.setItem('theme', 'dark');
                 applyTheme('dark');
+            });
+        }
+
+        if (mobileCodeModeBtn) {
+            mobileCodeModeBtn.addEventListener('click', function() {
+                localStorage.setItem('theme', 'code');
+                applyTheme('code');
             });
         }
     }

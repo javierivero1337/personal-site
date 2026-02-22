@@ -2,6 +2,8 @@
 
 /* Import Barlow Google Font */
 @import url('https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Geist+Mono:wght@300;400;500;600&display=swap');
 
 /* Base styles */
 html {
@@ -300,6 +302,19 @@ body.dark-mode .theme-toggle-container {
   height: 24px;
 }
 
+.theme-code-btn {
+  width: auto;
+  min-width: 34px;
+  padding: 0 0.4rem;
+}
+
+.theme-code-btn span {
+  font-family: 'Geist Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 0.65rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
 .theme-btn:hover {
   color: #111827;
 }
@@ -341,6 +356,19 @@ body.dark-mode .theme-btn#top-light-mode-btn.active {
 body.dark-mode .theme-btn#dark-mode-btn.active,
 body.dark-mode .theme-btn#top-dark-mode-btn.active {
   color: #818cf8;
+}
+
+/* Code mode button active state */
+.theme-btn#code-mode-btn.active,
+.theme-btn#top-code-mode-btn.active,
+.theme-btn#mobile-code-mode-btn.active {
+  color: #16a34a;
+}
+
+body.dark-mode .theme-btn#code-mode-btn.active,
+body.dark-mode .theme-btn#top-code-mode-btn.active,
+body.dark-mode .theme-btn#mobile-code-mode-btn.active {
+  color: #4ade80;
 }
 
 @media (max-width: 640px) {
@@ -664,6 +692,182 @@ body.dark-mode #mobile-nav-menu a {
 
 body.dark-mode #mobile-nav-menu a:hover {
   color: #60a5fa; /* Tailwind blue-400 */
+}
+
+/* Terminal-like code mode */
+html.code-mode {
+  font-size: 14px; /* Scaled down for terminal aesthetic */
+}
+
+/* Maintain the same absolute pixel width as the other modes */
+html.code-mode .max-w-2xl {
+  max-width: 54rem; /* 54rem * 14px = 756px (same as 42rem * 18px) */
+}
+
+body.code-mode {
+  background-color: #000000;
+  color: #a3a3a3;
+  font-family: 'Geist Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+body.code-mode a {
+  color: #a3a3a3;
+}
+
+body.code-mode a:hover {
+  color: #ffffff;
+}
+
+body.code-mode .text-gray-400 {
+  color: #525252 !important;
+}
+
+body.code-mode .text-gray-500,
+body.code-mode .text-gray-600,
+body.code-mode .text-gray-700 {
+  color: #a3a3a3 !important;
+}
+
+body.code-mode .text-blue-600,
+body.code-mode .company-arrow,
+body.code-mode #blog a .text-blue-600,
+body.code-mode #projects a .text-blue-600,
+body.code-mode #experience a .text-blue-600 {
+  color: #ffffff !important;
+}
+
+body.code-mode h1,
+body.code-mode h2,
+body.code-mode h3,
+body.code-mode h4,
+body.code-mode .font-bold,
+body.code-mode .font-semibold {
+  color: #ffffff;
+  font-weight: 500;
+}
+
+body.code-mode #blog a:hover,
+body.code-mode #projects a:hover,
+body.code-mode #experience a:hover,
+body.code-mode .back-link:hover {
+  color: #ffffff !important;
+}
+
+body.code-mode #blog a:not(.back-link):not([class*="company-arrow"]):after,
+body.code-mode #projects a:not(.back-link):not([class*="company-arrow"]):after,
+body.code-mode #experience a:not(.back-link):not([class*="company-arrow"]):after,
+body.code-mode .back-link-text span {
+  background-color: #ffffff !important;
+}
+
+body.code-mode #sticky-nav {
+  background-color: rgba(0, 0, 0, 0.9);
+  box-shadow: none;
+  border-bottom: 1px solid #1a1a1a;
+}
+
+body.code-mode #sticky-nav-title:hover {
+  color: #ffffff;
+}
+
+body.code-mode .theme-toggle-container {
+  background-color: #0a0a0a;
+  border-color: #262626;
+}
+
+body.code-mode .theme-btn {
+  color: #525252;
+}
+
+body.code-mode .theme-btn:hover {
+  color: #a3a3a3;
+}
+
+body.code-mode .theme-btn.active {
+  background-color: #171717;
+  color: #ffffff;
+  box-shadow: none;
+  border: 1px solid #333333;
+}
+
+/* Ensure the code mode active color is strictly white in code mode */
+body.code-mode .theme-btn#code-mode-btn.active,
+body.code-mode .theme-btn#top-code-mode-btn.active,
+body.code-mode .theme-btn#mobile-code-mode-btn.active {
+  color: #ffffff;
+}
+
+body.code-mode #mobile-nav-menu {
+  background-color: #000000;
+}
+
+body.code-mode #mobile-nav-menu a {
+  color: #a3a3a3;
+}
+
+body.code-mode #mobile-nav-menu a:hover {
+  color: #ffffff;
+}
+
+body.code-mode .border-gray-100 {
+  border-color: #1a1a1a !important;
+}
+
+/* Section styling for code mode */
+body.code-mode .space-y-10 > :not([hidden]) ~ :not([hidden]) {
+  margin-top: 0 !important;
+}
+
+body.code-mode #experience .space-y-10 > .flex,
+body.code-mode #projects .space-y-10 > .flex,
+body.code-mode #blog-entries > .flex,
+body.code-mode #hidden-entries > .flex {
+  border: 1px solid #1a1a1a;
+  padding: 1.5rem;
+  margin-top: -1px !important;
+  background-color: #000000;
+  position: relative;
+  transition: border-color 0.2s ease;
+}
+
+body.code-mode #experience .space-y-10 > .flex:hover,
+body.code-mode #projects .space-y-10 > .flex:hover,
+body.code-mode #blog-entries > .flex:hover,
+body.code-mode #hidden-entries > .flex:hover {
+  border-color: #333333;
+  z-index: 1;
+}
+
+body.code-mode #intro {
+  border: 1px dashed #262626;
+  padding: 2rem;
+  margin-top: 2.5rem;
+  background-color: transparent;
+}
+
+body.code-mode #contact,
+body.code-mode footer {
+  border: none;
+  background: transparent;
+  padding: 1.25rem 0;
+}
+
+body.code-mode #profile-pic {
+  filter: grayscale(100%) contrast(1.1);
+  border-radius: 4px; /* Square off the profile pic slightly for a terminal feel */
+}
+
+body.code-mode #show-more-btn {
+  border-color: #262626;
+  color: #737373;
+  background: #000000;
+  border-radius: 4px;
+}
+
+body.code-mode #show-more-btn:hover {
+  color: #ffffff;
+  border-color: #ffffff;
+  box-shadow: none;
 }
 
 /* Mobile menu toggle button */
