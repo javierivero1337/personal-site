@@ -141,20 +141,24 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Function to apply theme
         const applyTheme = (theme) => {
+            const profilePic = document.getElementById('profile-pic');
             if (theme === 'dark') {
                 document.body.classList.add('dark-mode');
                 document.body.classList.remove('code-mode');
                 document.documentElement.classList.remove('code-mode');
+                if (profilePic) profilePic.src = 'img/profile.jpeg';
                 setActiveThemeButton('dark');
             } else if (theme === 'code') {
                 document.body.classList.remove('dark-mode');
                 document.body.classList.add('code-mode');
                 document.documentElement.classList.add('code-mode');
+                if (profilePic) profilePic.src = 'img/profile-code.png';
                 setActiveThemeButton('code');
             } else {
                 document.body.classList.remove('dark-mode');
                 document.body.classList.remove('code-mode');
                 document.documentElement.classList.remove('code-mode');
+                if (profilePic) profilePic.src = 'img/profile.jpeg';
                 setActiveThemeButton('light');
             }
         };
