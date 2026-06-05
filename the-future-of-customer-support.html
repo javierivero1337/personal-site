@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="img/favicon.png" type="image/png">
+    <title>The Future of Customer Support - Javier Rivero</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+    <style>
+        /* Smooth fade-in animation specifically for this blog post */
+        @keyframes smoothFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-content {
+            opacity: 0;
+            animation: smoothFadeIn 0.8s ease-out forwards;
+            animation-delay: 0.2s; /* Slight delay for better user experience */
+        }
+
+        /* Mobile-specific styles */
+        @media (max-width: 640px) {
+            .back-link-text {
+                font-size: 0.9rem;
+                display: inline;
+            }
+
+            .blog-meta {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                text-align: left;
+            }
+
+            .blog-meta > * {
+                margin-right: 0.5rem;
+                display: inline;
+            }
+        }
+
+        /* Back link hover effect */
+        .back-link {
+            transition: all 0.2s ease;
+        }
+
+        .back-link-text {
+            position: relative;
+        }
+
+        .back-link-text::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: 0;
+            left: 0;
+            background-color: currentColor;
+            transition: width 0.3s ease;
+        }
+
+        .back-link:hover .back-link-text::after {
+            width: 100%;
+        }
+
+        /* Remove the default underline */
+        .back-link:hover .back-link-text {
+            text-decoration: none;
+        }
+    </style>
+    <script>
+        // Debug script to ensure sticky nav works
+        window.addEventListener('load', function() {
+            console.log("Window loaded");
+
+            // Get the sticky nav element
+            const stickyNav = document.getElementById('sticky-nav');
+
+            if (stickyNav) {
+                console.log("Found sticky nav element");
+
+                // Add scroll event listener directly here as a backup
+                window.addEventListener('scroll', function() {
+                    const scrollY = window.scrollY || window.pageYOffset;
+                    console.log("Scroll position:", scrollY);
+
+                    if (scrollY > 100) {
+                        stickyNav.classList.add('visible');
+                    } else {
+                        stickyNav.classList.remove('visible');
+                    }
+                });
+            }
+        });
+    </script>
+</head>
+<body class="bg-white text-gray-800">
+    <!-- Sticky Navigation Bar - Only visible on scroll -->
+    <nav id="sticky-nav" class="fixed top-0 left-0 w-full z-50 bg-white shadow-sm opacity-0 transition-opacity duration-300">
+        <div class="container mx-auto px-4 py-3 max-w-2xl flex justify-between items-center">
+            <div class="flex items-center">
+                <a href="index.html" class="back-link inline-flex items-center group">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                    </svg>
+                    <span class="back-link-text">Back to Home</span>
+                </a>
+            </div>
+            <div class="flex items-center">
+                <!-- Theme Toggle (Right) -->
+                <div class="theme-toggle-container flex rounded-md bg-gray-100 p-0.5">
+                    <!-- Light Mode (Sun) -->
+                    <button id="light-mode-btn" class="theme-btn flex items-center justify-center rounded-md p-1 transition-all" aria-label="Light Mode">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                        </svg>
+                    </button>
+                    <!-- Dark Mode (Moon) -->
+                    <button id="dark-mode-btn" class="theme-btn flex items-center justify-center rounded-md p-1 transition-all" aria-label="Dark Mode">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto px-8 sm:px-10 pt-6 pb-10 max-w-2xl" id="main-container">
+        <!-- Top Bar with Back Button and Theme Toggle -->
+        <div class="flex justify-between mb-8 sm:mb-12 items-center" id="top-bar">
+            <!-- Back Button (Left) -->
+            <a href="index.html" class="back-link inline-flex items-center group">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+                <span class="back-link-text">Back to Home</span>
+            </a>
+
+            <!-- Theme Toggle (Right) -->
+            <div class="flex items-center">
+                <div class="theme-toggle-container flex rounded-md bg-gray-100 p-0.5">
+                    <!-- Light Mode (Sun) -->
+                    <button id="top-light-mode-btn" class="theme-btn flex items-center justify-center rounded-md p-1 transition-all" aria-label="Light Mode">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                        </svg>
+                    </button>
+
+                    <!-- Dark Mode (Moon) -->
+                    <button id="top-dark-mode-btn" class="theme-btn flex items-center justify-center rounded-md p-1 transition-all" aria-label="Dark Mode">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Blog Post Content - Added fade-in-content class -->
+        <div class="fade-in-content">
+            <!-- Blog Post Header -->
+            <header class="mb-8">
+                <h1 class="text-2xl sm:text-3xl font-bold mb-4 text-left">
+                    <span class="lang-en">The Future of Customer Support</span>
+                </h1>
+                <div class="blog-meta text-gray-500 mb-6 text-sm sm:text-base">
+                    <div class="lang-en">
+                        <time datetime="2026-06-05" class="inline">June 5, 2026</time>
+                        <span class="separator mx-2 inline">&bull;</span>
+                        <span class="inline">4 min read</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Blog Post Content -->
+            <article class="prose prose-lg max-w-none">
+                <!-- Main content section -->
+                <section class="mb-8">
+                    <div class="lang-en">
+                        <p class="mb-4">
+                            It has now become obvious that AI will find great product-market fit in places where repetition is the norm, and what better place than customer support? It is a universe that relies heavily on canned responses, knowledge bases, resolution paths &amp; adherence to policies.
+                        </p>
+                        <p class="mb-4">
+                            So, a safe bet you can make today is labeling customer support as the next AI victim (as some like to call it). But I don&rsquo;t believe there are going to be any victims when you look at the long-term view of how AI will shape the support experience
+                        </p>
+                    </div>
+                </section>
+
+                <section class="mb-8">
+                    <h2 class="text-xl sm:text-2xl font-bold mb-4">Phase I &ndash; Efficiency gains</h2>
+                    <p class="mb-4">
+                        AI at the most basic level will prove to be incredibly powerful when working with huge bodies of text (a.k.a. knowledge bases). People are going to be bewildered by a model doing the work that content and enablement teams used to do. There will be no need for long, tiring reviews of resolution paths; an LLM can handle that, and basic text editing will become 10x easier once you get a hold of this technology.
+                    </p>
+                </section>
+
+                <section class="mb-8">
+                    <h2 class="text-xl sm:text-2xl font-bold mb-4">Phase II &ndash; The AI bot (we are here)</h2>
+                    <p class="mb-4">
+                        As of the day of writing, there isn&rsquo;t an exemplary AI chatbot that can claim to have completely solved the &quot;AI as a support agent&quot; problem, but we&rsquo;re getting there. Rudimentary RAG provided a solid first leap, and now skill-based support agents are proving to be better than expected. Given the right tool access and correct prompting, an AI model based purely on skills can now be 10x more helpful than its predecessor.
+                    </p>
+                </section>
+
+                <section class="mb-8">
+                    <h2 class="text-xl sm:text-2xl font-bold mb-4">Phase III &ndash; Proactive support</h2>
+                    <p class="mb-4">
+                        As we get better at building AI support agents driven by specific skills, we will shift our attention toward finding patterns, identifying broken customer journeys where AI can step in, surfacing directly inside the product the moment it detects friction. The customer will no longer need to go out and look for help; instead, the product itself becomes the support surface. It&rsquo;s just a matter of time until we figure out how to embed these models seamlessly across the entire customer journey.
+                    </p>
+                </section>
+
+                <section class="mb-8">
+                    <h2 class="text-xl sm:text-2xl font-bold mb-4">Phase IV &ndash; Personalized support</h2>
+                    <p class="mb-4">
+                        This is where I envision the support experience heading: an ecosystem tailored so closely to its user that the product knows you inside out. It won't just anticipate a generic problem; it will anticipate your problem. Because it understands your specific configuration, your billing history, and the exact button you clicked ten seconds ago, the solution is already waiting for you. It will be an experience so seamless that you&rsquo;ll feel the product knows you perfectly, understanding possible friction points in your journey and proactively unblocking you from them.
+                    </p>
+                    <p class="mb-4">
+                        To go from Phase I to Phase IV is a big leap, but it's one I&rsquo;m excited to build and push for. I truly believe AI will get rid of our tedious problems and effectively enable us to enjoy a seamless product experience, without ever having to think about support.
+                    </p>
+                </section>
+            </article>
+
+            <!-- Similar Entries Section -->
+            <div class="mt-12 pt-8 border-t border-gray-100">
+                <h3 class="text-sm text-gray-400 mb-4">Similar entries</h3>
+                <div class="flex flex-col space-y-3">
+                    <a href="why-intelligence-is-not-artificial.html" class="group inline-flex items-center gap-1 text-gray-600 hover:text-blue-600 transition-colors">
+                        Why Intelligence Is Not Artificial
+                        <span class="text-blue-600 opacity-0 group-hover:opacity-100 transition-opacity transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5">&nearr;</span>
+                    </a>
+                    <a href="shouldiuseai.html" class="group inline-flex items-center gap-1 text-gray-600 hover:text-blue-600 transition-colors">
+                        Should I Use AI?
+                        <span class="text-blue-600 opacity-0 group-hover:opacity-100 transition-opacity transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5">&nearr;</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        // Script to handle sticky nav visibility
+        document.addEventListener('DOMContentLoaded', function() {
+            const stickyNav = document.getElementById('sticky-nav');
+
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 100) {
+                    stickyNav.classList.add('opacity-100');
+                    stickyNav.classList.remove('opacity-0');
+                } else {
+                    stickyNav.classList.remove('opacity-100');
+                    stickyNav.classList.add('opacity-0');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
