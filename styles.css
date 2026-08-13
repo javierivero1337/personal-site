@@ -643,7 +643,7 @@ body.dark-mode #experience a .text-blue-600 {
 }
 
 #hidden-entries.visible {
-  max-height: 1000px; /* Adjust based on your content height */
+  max-height: 2000px; /* Fits the expanded older-writing list */
   opacity: 1;
 }
 
