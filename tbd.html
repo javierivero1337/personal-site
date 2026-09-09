@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="description" content="Lauren noticed her hands had been shaking for a while.">
+    <link rel="icon" href="img/favicon.png" type="image/png">
+    <title>The Big Disconnect - Javier Rivero</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+    <style>
+        @keyframes smoothFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-content {
+            opacity: 0;
+            animation: smoothFadeIn 0.8s ease-out forwards;
+            animation-delay: 0.2s;
+        }
+
+        @media (max-width: 640px) {
+            .back-link-text {
+                font-size: 0.9rem;
+                display: inline;
+            }
+
+            .blog-meta {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                text-align: left;
+            }
+
+            .blog-meta > * {
+                margin-right: 0.5rem;
+                display: inline;
+            }
+        }
+
+        .back-link {
+            transition: all 0.2s ease;
+        }
+
+        .back-link-text {
+            position: relative;
+        }
+
+        .back-link-text::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: 0;
+            left: 0;
+            background-color: currentColor;
+            transition: width 0.3s ease;
+        }
+
+        .back-link:hover .back-link-text::after {
+            width: 100%;
+        }
+
+        .back-link:hover .back-link-text {
+            text-decoration: none;
+        }
+
+        article.story {
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        @media (max-width: 640px) {
+            article.story {
+                font-size: 1rem;
+                line-height: 1.75;
+            }
+        }
+
+        article.story h2 {
+            margin-top: 2.75rem;
+        }
+
+        .story-sms {
+            font-style: italic;
+            color: #4b5563;
+        }
+
+        body.dark-mode .story-sms {
+            color: #d1d5db;
+        }
+
+        .story-notice,
+        .story-board {
+            margin: 1.5rem 0;
+            padding: 0.9rem 1rem;
+            background: #f7f7f5;
+            border-left: 2px solid #d6d3d1;
+            font-size: 0.95em;
+            line-height: 1.55;
+        }
+
+        body.dark-mode .story-notice,
+        body.dark-mode .story-board {
+            background: #1f2937;
+            border-left-color: #4b5563;
+        }
+
+        .story-notice + .story-notice {
+            margin-top: -0.85rem;
+        }
+
+        .story-notice p,
+        .story-board p {
+            margin-bottom: 0.15rem;
+        }
+
+        .story-notice p:last-child,
+        .story-board p:last-child {
+            margin-bottom: 0;
+        }
+
+        .story-notice-app,
+        .story-board-title {
+            font-weight: 600;
+            font-size: 0.85em;
+            letter-spacing: 0.01em;
+            margin-bottom: 0.35rem;
+        }
+
+        .story-board p + p {
+            margin-top: 0.35rem;
+        }
+
+        .story-break {
+            text-align: center;
+            letter-spacing: 0.45em;
+            color: #9ca3af;
+            margin: 2.75rem 0;
+            font-size: 0.95rem;
+        }
+
+        .story-license {
+            font-size: 0.8rem;
+            line-height: 1.6;
+            color: #9ca3af;
+        }
+
+        .story-license a[href] {
+            color: #9ca3af;
+            text-decoration: underline;
+        }
+
+        body.dark-mode .story-license a[href] {
+            color: #9ca3af;
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-800">
+    <nav id="sticky-nav" class="fixed top-0 left-0 w-full z-50 bg-white shadow-sm opacity-0 transition-opacity duration-300">
+        <div class="container mx-auto px-4 py-3 max-w-2xl flex justify-between items-center">
+            <a href="index.html" class="back-link inline-flex items-center group">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+                <span class="back-link-text">Back to Home</span>
+            </a>
+            <div class="theme-toggle-container flex rounded-md bg-gray-100 p-0.5">
+                <button id="light-mode-btn" class="theme-btn flex items-center justify-center rounded-md p-1 transition-all" aria-label="Light Mode">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                    </svg>
+                </button>
+                <button id="dark-mode-btn" class="theme-btn flex items-center justify-center rounded-md p-1 transition-all" aria-label="Dark Mode">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mx-auto px-8 sm:px-10 pt-6 pb-10 max-w-2xl" id="main-container">
+        <div class="flex justify-between mb-8 sm:mb-12 items-center" id="top-bar">
+            <a href="index.html" class="back-link inline-flex items-center group">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+                <span class="back-link-text">Back to Home</span>
+            </a>
+            <div class="theme-toggle-container flex rounded-md bg-gray-100 p-0.5">
+                <button id="top-light-mode-btn" class="theme-btn flex items-center justify-center rounded-md p-1 transition-all" aria-label="Light Mode">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                    </svg>
+                </button>
+                <button id="top-dark-mode-btn" class="theme-btn flex items-center justify-center rounded-md p-1 transition-all" aria-label="Dark Mode">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <div class="fade-in-content">
+            <header class="mb-8">
+                <h1 class="text-2xl sm:text-3xl font-bold mb-4 text-left">
+                    <span class="lang-en">The Big Disconnect</span>
+                </h1>
+                <div class="blog-meta text-gray-500 mb-6 text-sm sm:text-base">
+                    <div class="lang-en">
+                        <time datetime="2026-09-09" class="inline">September 9, 2026</time>
+                        <span class="separator mx-2 inline">•</span>
+                        <span class="inline">11 min read</span>
+                    </div>
+                </div>
+            </header>
+
+            <article class="prose prose-lg max-w-none story">
+                <section class="mb-8">
+                    <p class="mb-4">Lauren noticed her hands had been shaking for a while.</p>
+                    <p class="mb-4">Every few minutes she caught herself reaching for a phone that wasn't there. She had already checked the table three times. Nothing. No notifications. No glowing screen. Just an empty room and the sound of her own breathing.</p>
+                    <p class="mb-4">She hadn't watched anything in eleven hours.</p>
+                </section>
+
+                <section class="mb-8">
+                    <h2 class="text-xl sm:text-2xl font-bold mb-4">Chapter 1</h2>
+                    <p class="mb-4">It's almost lunchtime, and Lauren hasn't really gotten much done today. Her role as a customer support agent has been highly automated, and every week, Davis seems to take on more tickets, with a CSAT score Lauren could only dream of.</p>
+                    <p class="mb-4">Last month, she had been proud of being one of the team's fastest responders. Now Davis handled most of her queue before she even finished reading it.</p>
+                    <p class="mb-4">Long gone were the days when Davis was introduced to her and the team. Davis AI—the manager had promised—would be their “second brain,” a system that could help them work faster, catch mistakes, and take some of the pressure off.</p>
+                    <p class="mb-4">What does that even mean? she wondered, careful not to let her face betray her confusion.</p>
+                    <p class="mb-4">She didn't put much thought into it. She mindlessly scrolled Weavr as the manager spoke over Zoom, the tiny window of his face occupying one corner of her screen while the rest of it was filled with something far more interesting. It was obvious she was looking away, glued to the little screen below the meeting window, but nobody enforced cameras anymore. She disabled hers and kept scrolling.</p>
+                    <p class="mb-4">A notification popped up on her phone.</p>
+                    <p class="story-sms mb-4">smoke break?</p>
+                    <p class="mb-4">Julian was the only human Lauren had been talking to regularly lately. Not because they were particularly close or lived in the same apartment building, but because he was one of the few people who still texted her without being prompted to.</p>
+                    <p class="mb-4">She had become increasingly isolated after ending a seven-year relationship with her crypto-addicted, gambling partner.</p>
+                    <p class="mb-4">“The only thing I took from him was how much gambling can destroy someone,” she would joke whenever the subject came up. Her friends had stopped reacting months ago. By now, the line was met with the same polite silence reserved for stories everyone had heard before.</p>
+                    <p class="mb-4"><span class="story-sms">down in 5</span> – Lauren replied.</p>
+                    <p class="mb-4">Lauren wasn't a smoker. She had always considered cigarettes an impressive way to spend money making yourself smell terrible, but she was more than happy to talk to Julian.</p>
+                    <p class="mb-4">These days, this was the only human nudge she would get in her notification center anyway.</p>
+                    <p class="mb-4">“So, did you hear they're opening a few cinemas again?” Julian asked.</p>
+                    <p class="mb-4">Lauren looked up from her phone. “Why?”</p>
+                    <p class="mb-4">“Apparently people miss going to the movies. Watching something with other people, I guess.”</p>
+                    <p class="mb-4">Lauren laughed. “That's dumb.”</p>
+                    <p class="mb-4">“Why?”</p>
+                    <p class="mb-4">“You mean you can't just generate your own movie anymore?”</p>
+                    <p class="mb-4">“You can.” Julian answered sharply.</p>
+                    <p class="mb-4">“Then what's the point?” she wondered.</p>
+                    <p class="mb-4">Julian took a drag from his cigarette.</p>
+                    <p class="mb-4">“That's the point.”</p>
+                </section>
+
+                <section class="mb-8">
+                    <h2 class="text-xl sm:text-2xl font-bold mb-4">Chapter 2</h2>
+                    <p class="mb-4">Lauren woke up only to find herself cursing out loud because she had stepped into a plastic fork lying around her room. It was buried among a pile of delivery bags, disposable cutlery, and half-finished packaging that had accumulated over the past few weeks. A stack of chopsticks sat next to a stray soy sauce packet, while several books beside her bedside table had gathered enough dust to make their spines hard to read.</p>
+                    <p class="mb-4">Somewhere underneath the mess were two small household robots she had bought during the latest automation craze: one for folding laundry, another for loading the dishwasher. She couldn't remember the last time either of them had been turned on.</p>
+                    <p class="mb-4">This was an unrecognizable version of her. Ten years ago, she would have obsessed over the alignment of her dental floss, or wondered why her toothbrush wasn't the exact same neon tone as the floss. Now, those mundane details were just part of an ever-growing list of things she had stopped paying attention to.</p>
+                    <p class="mb-4">Her first stop was her cellphone. She reached for the phone charging on the table outside her room. ChatGPT had confirmed that keeping your phone outside the bedroom helped with concentration, so technically, she was doing the right thing. Her first instinct was to snooze the alarm and unlock it.</p>
+                    <p class="mb-4">Half asleep, she read through her notifications:</p>
+
+                    <aside class="story-notice">
+                        <p class="story-notice-app">[7:41 AM] SleepAura</p>
+                        <p>You slept 4h 12m last night. Your weekly sleep debt has risen to 4hr 32min.</p>
+                    </aside>
+                    <aside class="story-notice">
+                        <p class="story-notice-app">[7:42 AM] For You</p>
+                        <p>We noticed you were looking for apartments outside the city. We found some options that will fit your budget!</p>
+                    </aside>
+                    <aside class="story-notice">
+                        <p class="story-notice-app">[7:43 AM] Insights</p>
+                        <p>You haven't spoken to Diego in the past 39 days. Would you like me to send a text on your behalf?</p>
+                    </aside>
+                    <aside class="story-notice">
+                        <p class="story-notice-app">[7:45 AM] TurntableFM</p>
+                        <p>We detected elevated stress for 2hr 13min yesterday. Here's a Relaxing Beats &amp; Mood Enhancing playlist made for you.</p>
+                    </aside>
+                    <aside class="story-notice">
+                        <p class="story-notice-app">[7:46 AM] Shopping</p>
+                        <p>Your morning breakfast: Special Sunshine Burrito from Tacolandia will be delivered in 21 minutes.</p>
+                    </aside>
+
+                    <p class="mb-4">After a quick skim, barely registering the notifications, let alone the metrics beneath them, Lauren tapped and opened Weavr immediately.</p>
+                    <p class="mb-4">A few seconds of video became another, then another, each one generated on the fly from whatever had kept her watching yesterday. She barely registered what she was seeing anymore—a dog speaking in her mother's voice, a cooking show set on Mars, a man explaining something she had no memory of asking about. Every time her mind started drifting away, something slightly more interesting appeared.</p>
+                    <p class="mb-4">Suddenly there's a knock at the door. Her burrito has arrived.</p>
+                    <p class="mb-4">Lauren keeps watching as the food gets cold but she doesn't notice.</p>
+                    <p class="mb-4">By the time she finally looks up, 28 minutes have passed.</p>
+                    <p class="mb-4">Her first meeting starts in two.</p>
+                    <p class="mb-4">Her phone vibrates again.</p>
+                    <aside class="story-notice">
+                        <p class="story-notice-app">[Weavr]</p>
+                        <p>Still watching?</p>
+                    </aside>
+                    <p class="mb-4">Lauren barely needs to participate in her own morning anymore.</p>
+                </section>
+
+                <section class="mb-8">
+                    <h2 class="text-xl sm:text-2xl font-bold mb-4">Chapter 3</h2>
+                    <p class="mb-4">Lauren opened up her screen.</p>
+                    <aside class="story-notice">
+                        <p>0 new support cases.</p>
+                    </aside>
+                    <p class="mb-4">For a moment, there was nothing to do. It was the perfect opportunity for a quick hit.</p>
+                    <p class="mb-4">Her finger hovered over Weavr, but before she could open it, a notification appeared in the top-right corner of her screen.</p>
+                    <aside class="story-notice">
+                        <p>🔔 Your productivity has decreased by 17% this week. Need some support? Click to read some tips!</p>
+                    </aside>
+                    <p class="mb-4">She dismissed it and opened Weavr anyway.</p>
+                    <p class="mb-4">She had no idea how much time passed. When she finally snapped out of it, two tickets were waiting for her response, both from angry customers. She rushed to catch up, answering one and then the other, watching the little productivity indicator slowly climb back toward green. The relief lasted less than a minute. As soon as the second ticket was solved, she opened Weavr again.</p>
+                    <p class="mb-4">Just for a minute, she thought.</p>
+                    <p class="mb-4">It was obvious to everyone else that Lauren was falling behind. Her coworkers had noticed. Her supervisor had noticed. Even Davis seemed to notice.</p>
+                    <p class="mb-4">But every warning was met with another explanation. Brain fog. Migraines. Poor sleep. Stress. She had been under a lot of pressure lately. Anyone would be struggling. Anxiety was a real issue, especially for people who were actually trying to keep up with their work.</p>
+                    <p class="mb-4">And besides, she was still getting things done. Just slower.</p>
+                    <p class="mb-4">Until one morning, a 15-min Zoom call appeared on her calendar.</p>
+                    <aside class="story-notice">
+                        <p>🔔 Daniel / Lauren — 10:00 AM</p>
+                    </aside>
+                    <p class="mb-4">She stared at it for a few seconds before joining, wondering if Daniel had just rescheduled their weekly 1:1.</p>
+                    <p class="mb-4">The HR guy was in the room but her manager spoke first. Then HR repeated what sounded like a carefully practiced version of the same sentence. They appreciated everything she'd contributed. They understood this was difficult. Unfortunately, her performance had declined significantly over the past several months, and they had decided to terminate her position effective immediately.</p>
+                    <p class="mb-4">There was more after that—severance, benefits, equipment returns, a final paycheck—but Lauren stopped listening.</p>
+                    <p class="mb-4">She stared at the little rectangles on her screen. For once, she wasn't thinking about work. She wasn't even thinking about Weavr. All she could think about was going outside. Taking a walk. She couldn't remember the last time she'd done that without having somewhere to be.</p>
+                    <p class="mb-4">When the call ended, Lauren closed the laptop and sat there for a while. The apartment was quiet, the delivery bags and empty containers scattered around the room almost seeming to stare back at her.</p>
+                    <p class="mb-4">She looked toward the front door. Maybe she'd go for a walk.</p>
+                    <p class="mb-4">She sat on her sofa, unlocked her phone, and opened Weavr without ever really deciding to.</p>
+                    <p class="mb-4">Five minutes ago, she had been thinking about going outside. Now she was watching a video of a miniature chef preparing ramen in the middle of a volcano.</p>
+                    <p class="mb-4">Lauren scrolled.</p>
+                </section>
+
+                <section class="mb-8">
+                    <h2 class="text-xl sm:text-2xl font-bold mb-4">Chapter 4</h2>
+                    <p class="story-sms mb-4">grabbing some ☕, wanna come?</p>
+                    <p class="mb-4">Lauren instinctively swiped the notification away, then paused and opened it again.</p>
+                    <p class="story-sms mb-4">sure, be down in a sec.</p>
+                    <p class="mb-4">After Lauren finished talking, Julian tried to act surprised and empathetic, even though he knew this was only a matter of time. She hadn't really been herself for quite some time now.</p>
+                    <p class="mb-4">Sometimes he wondered why he still kept talking to her. Habits, he thought, could be rooted in convenience too.</p>
+                    <p class="mb-4">There was a small sense of guilt buried somewhere inside him. He vividly remembered those first few weeks when he had shown her all the new personalized apps, convincing her to download them so they could laugh about how absurdly specific they could get.</p>
+                    <p class="mb-4">No one was laughing now.</p>
+                    <p class="mb-4">They walked toward the coffee shop, one of the few remaining places where people still bothered to go in person. Lauren spent most of the walk complaining about how unfairly she'd been treated at work.</p>
+                    <p class="mb-4">Julian listened for a while before casually bringing up the pods.</p>
+                    <p class="mb-4">Lauren immediately rolled her eyes. “Oh, please. Those things are for influencers and rich people.”</p>
+                    <p class="mb-4">“They're not.”</p>
+                    <p class="mb-4">“They absolutely are. Every six months there's some new person posting about how they did a ten-day cleanse and came back as a better version of themselves.” She shook her head. “Last time something was used for virtue signaling like that, it was saunas and cold plunges.”</p>
+                    <p class="mb-4">Julian smiled. “You need help.”</p>
+                    <p class="mb-4">Lauren looked at him. “What?”</p>
+                    <p class="mb-4">“You need help, Lauren.”</p>
+                    <p class="mb-4">She stared ahead. “I'm fine.”</p>
+                    <p class="mb-4">“You lost your job.”</p>
+                    <p class="mb-4">“That doesn't mean anything.”</p>
+                    <p class="mb-4">“It means you haven't been fine for a while.”</p>
+                    <p class="mb-4">She didn't answer.</p>
+                    <p class="mb-4">Julian hesitated before continuing. He had been through one of the pods himself, almost a year ago, back when he still had enough self-awareness to recognize that something was wrong. Ten days without a screen had been miserable, but when he came out, he had managed to get himself back on track before things got bad.</p>
+                    <p class="mb-4">Lauren hadn't gotten there.</p>
+                    <p class="mb-4">“It's worth trying. Seriously. You've completely lost track of who you are.”</p>
+                    <p class="mb-4">Lauren stared toward the horizon while he kept talking. She hated the certainty in his voice, the way he talked about the pods as if he'd somehow figured something out that she hadn't.</p>
+                    <p class="mb-4">“Besides, they have this annual membership thing. You pay the first month and cancel right after. Apparently there's some loophole. Plus, I think you get three months of LinkedIn Exist.”</p>
+                    <p class="mb-4">That got her attention.</p>
+                    <p class="mb-4">“LinkedIn Exist?”</p>
+                    <p class="mb-4">“Yeah. Human-only jobs.”</p>
+                    <p class="mb-4">She laughed. “Human-only?”</p>
+                    <p class="mb-4">“Physical presence. Trust. Unpredictability. Embodiment. Human connection. That's literally how they advertise it.”</p>
+                    <p class="mb-4">Lauren smiled despite herself. “That's depressing.”</p>
+                    <p class="mb-4">“Probably. But it's a job.”</p>
+                    <p class="mb-4">She didn't answer right away. They kept walking, and for the first time since she'd lost her job, Lauren looked less irritated than tired.</p>
+                    <p class="mb-4">Ten days, she thought. She could survive ten days.</p>
+                    <p class="mb-4">The first few days inside the pod were miserable.</p>
+                    <p class="mb-4">Lauren kept reaching for a phone that wasn't there. She heard phantom notifications and thought she saw flashes of movement in the darkness. She slept badly.</p>
+                    <p class="mb-4">She was bored in a way she had almost forgotten was possible.</p>
+                    <p class="mb-4">Then, slowly, the noise stopped. There was nothing to watch, nothing to scroll, nothing to optimize, nothing asking her to feel anything. By the tenth day, silence had become almost comfortable.</p>
+                    <p class="mb-4">When she stepped outside, the world seemed painfully bright. Julian was waiting for her.</p>
+                    <p class="mb-4">“How do you feel?”</p>
+                    <p class="mb-4">Lauren looked at the street, then at him. “Hungry.”</p>
+                    <p class="mb-4">He laughed. “Good.”</p>
+                    <p class="mb-4">The city hadn't changed at all while she was gone. Drones had replaced most delivery work, and autonomous vehicles handled what was left. The few human gig jobs still available were mostly low-paying model-training positions, hours spent validating AI outputs over and over again.</p>
+                    <p class="mb-4">Lauren had heard what it was like: thousands of clips, thousands of decisions. Accept. Reject. Accept. Reject. She wasn't ready to spend her days doing that.</p>
+                    <p class="mb-4">So she opened LinkedIn Exist.</p>
+                    <p class="mb-4">The interface was almost embarrassingly simple.</p>
+                    <aside class="story-board">
+                        <p class="story-board-title">Human-Only Opportunities</p>
+                        <p>Childcare Worker — $13/hr</p>
+                        <p>Home Health Aide — $14/hr</p>
+                        <p>House Cleaner — $12/hr</p>
+                        <p>Preschool Teacher — $16/hr</p>
+                        <p>Maintenance Technician — $18/hr</p>
+                    </aside>
+                    <p class="mb-4">Childcare Worker caught her attention.</p>
+                    <p class="mb-4">She clicked Easy Apply.</p>
+                </section>
+
+                <section class="mb-8">
+                    <h2 class="text-xl sm:text-2xl font-bold mb-4">Chapter 5</h2>
+                    <p class="mb-4">“It's been three months, and I have to say, I haven't felt this satisfied in years,” Lauren texted her sister.</p>
+                    <p class="mb-4">“Omg, I'm so happy to hear that! Can you FaceTime in 10 minutes?”</p>
+                    <p class="mb-4">“Sure!”</p>
+                    <p class="mb-4">Ten minutes later, Lauren was sitting on the floor of the after-school center, still wearing the same clothes she'd worked in all day. Behind her, a group of children were arguing over the rules of a game they'd invented and immediately started changing as they played.</p>
+                    <p class="mb-4">Her sister smiled when she saw her.</p>
+                    <p class="mb-4">“So this is what you've been doing?”</p>
+                    <p class="mb-4">Lauren laughed. “Mostly.”</p>
+                    <p class="mb-4">As they talked, Lara could see her sister smiling in a way she hadn't seen in years. Not the polite smile she'd learned to use around friends and coworkers, but a genuine one. It made Lara smile too.</p>
+                    <p class="mb-4">“It's so grounding to be around all these children,” Lauren said. “We draw things with crayons, we invent games, we make up stories. Sometimes they just ask me the weirdest questions.”</p>
+                    <p class="mb-4">“Like what?”</p>
+                    <p class="mb-4">Lauren thought for a moment.</p>
+                    <p class="mb-4">“One of them asked me what I do when I get bored.”</p>
+                    <p class="mb-4">Lara laughed. “What did you say?”</p>
+                    <p class="mb-4">“I didn't know.”</p>
+                    <p class="mb-4">“Seriously?”</p>
+                    <p class="mb-4">“Seriously.” Lauren smiled. “I told him I guess I just... do something.”</p>
+                    <p class="mb-4">They both laughed.</p>
+                    <p class="mb-4">They talked for another few minutes before saying goodbye. When the call ended, Lauren stayed sitting there for a moment, listening to the children arguing in the background.</p>
+                    <p class="mb-4">It was loud.</p>
+                    <p class="mb-4">It was messy.</p>
+                    <p class="mb-4">It was exhausting.</p>
+                    <p class="mb-4">She loved it.</p>
+                    <p class="story-break">* * *</p>
+                    <p class="mb-4">Three months later, Lauren walked into her apartment and dropped her keys on the table.</p>
+                    <p class="mb-4">The place was different now. There were still a few delivery bags in the trash, but the piles were gone. The books beside her bed were visible again, and for the first time in months, the room felt intentional.</p>
+                    <p class="mb-4">Her phone was sitting on the table. She hadn't touched it all day.</p>
+                    <p class="mb-4">For the past months, she had barely thought about Weavr. It was one of the apps she stopped using on her first day back from the pod, and eventually she stopped thinking about it altogether.</p>
+                    <p class="mb-4">At first, avoiding it had taken effort. Eventually, she simply stopped missing it.</p>
+                    <p class="mb-4">As she walked past, the screen lit up.</p>
+                    <aside class="story-notice">
+                        <p class="story-notice-app">Weavr</p>
+                        <p>We've missed you! Tap to see what we made while you were away.</p>
+                    </aside>
+                    <p class="mb-4">Lauren stopped.</p>
+                    <p class="mb-4">She stared at the notification for a few seconds.</p>
+                    <p class="mb-4">She picked up the phone and opened the app.</p>
+                    <p class="mb-4">She scrolled.</p>
+                    <p class="mb-4">And then scrolled some more.</p>
+                </section>
+            </article>
+
+            <div class="mt-12 pt-8 border-t border-gray-100">
+                <p class="story-license">
+                    © 2026 Javier Rivero. This work is licensed under a
+                    <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener noreferrer">Creative Commons Attribution-NonCommercial 4.0 International License (CC BY-NC 4.0)</a>.
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const stickyNav = document.getElementById('sticky-nav');
+
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 100) {
+                    stickyNav.classList.add('opacity-100');
+                    stickyNav.classList.remove('opacity-0');
+                } else {
+                    stickyNav.classList.remove('opacity-100');
+                    stickyNav.classList.add('opacity-0');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
