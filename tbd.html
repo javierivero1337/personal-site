@@ -37,52 +37,6 @@
             animation-delay: 0.2s;
         }
 
-        @media (max-width: 640px) {
-            .back-link-text {
-                font-size: 0.9rem;
-                display: inline;
-            }
-
-            .blog-meta {
-                display: flex;
-                flex-direction: row;
-                align-items: center;
-                text-align: left;
-            }
-
-            .blog-meta > * {
-                margin-right: 0.5rem;
-                display: inline;
-            }
-        }
-
-        .back-link {
-            transition: all 0.2s ease;
-        }
-
-        .back-link-text {
-            position: relative;
-        }
-
-        .back-link-text::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 1px;
-            bottom: 0;
-            left: 0;
-            background-color: currentColor;
-            transition: width 0.3s ease;
-        }
-
-        .back-link:hover .back-link-text::after {
-            width: 100%;
-        }
-
-        .back-link:hover .back-link-text {
-            text-decoration: none;
-        }
-
         article.story {
             font-size: 1.05rem;
             line-height: 1.8;
@@ -105,20 +59,57 @@
             color: #f3f4f6;
         }
 
-        body.dark-mode #sticky-nav {
-            background-color: rgba(17, 24, 39, 0.92);
-        }
-
         .story-sms {
-            font-style: italic;
-            color: #4b5563;
+            display: table;
+            max-width: min(82%, 28rem);
+            margin: 1.35rem 0 1.35rem auto;
+            padding: 0.65rem 0.9rem;
+            color: #43385e;
+            background: linear-gradient(135deg, #f0eaff, #e6f0ff);
+            border: 1px solid rgba(124, 102, 176, 0.18);
+            border-radius: 1rem 1rem 0.25rem 1rem;
+            box-shadow: 0 6px 18px rgba(91, 70, 130, 0.08);
+            font-style: normal;
+            transform: rotate(-0.35deg);
         }
 
+        span.story-sms {
+            display: inline-block;
+            margin: 0 0.2rem 0.2rem 0;
+        }
+
+        html.dark-mode .story-sms,
         body.dark-mode .story-sms {
-            color: #d1d5db;
+            color: #eee9ff;
+            background: linear-gradient(135deg, #392f52, #263855);
+            border-color: rgba(196, 181, 253, 0.2);
         }
 
-        .story-notice,
+        .story-notice {
+            position: relative;
+            margin: 1.5rem 0;
+            padding: 1rem 1.1rem 1rem 1.25rem;
+            overflow: hidden;
+            background:
+                linear-gradient(120deg, rgba(255, 255, 255, 0.84), rgba(255, 255, 255, 0.35)),
+                linear-gradient(135deg, #eef8ff, #f8efff);
+            border: 1px solid rgba(113, 98, 154, 0.14);
+            border-radius: 0.9rem;
+            box-shadow: 0 8px 22px rgba(55, 65, 81, 0.07);
+            font-size: 0.95em;
+            line-height: 1.55;
+        }
+
+        .story-notice::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            width: 4px;
+            background: linear-gradient(#8b7cc7, #65a8c7);
+        }
+
         .story-board {
             margin: 1.5rem 0;
             padding: 0.9rem 1rem;
@@ -128,8 +119,16 @@
             line-height: 1.55;
         }
 
+        html.dark-mode .story-notice,
         body.dark-mode .story-notice,
         body.dark-mode .story-board {
+            background:
+                linear-gradient(120deg, rgba(31, 41, 55, 0.9), rgba(31, 41, 55, 0.55)),
+                linear-gradient(135deg, #26374a, #3a2c47);
+            border-color: rgba(196, 181, 253, 0.16);
+        }
+
+        html.dark-mode .story-board {
             background: #1f2937;
             border-left-color: #4b5563;
         }
@@ -185,63 +184,12 @@
     </style>
 </head>
 <body class="bg-white text-gray-800">
-    <nav id="sticky-nav" class="fixed top-0 left-0 w-full z-50 bg-white shadow-sm opacity-0 transition-opacity duration-300">
-        <div class="container mx-auto px-4 py-3 max-w-2xl flex justify-between items-center">
-            <a href="index.html" class="back-link inline-flex items-center group">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-                </svg>
-                <span class="back-link-text">Back to Home</span>
-            </a>
-            <div class="theme-toggle-container flex rounded-md bg-gray-100 p-0.5">
-                <button id="light-mode-btn" class="theme-btn flex items-center justify-center rounded-md p-1 transition-all" aria-label="Light Mode">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-                    </svg>
-                </button>
-                <button id="dark-mode-btn" class="theme-btn flex items-center justify-center rounded-md p-1 transition-all" aria-label="Dark Mode">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-                    </svg>
-                </button>
-            </div>
-        </div>
-    </nav>
-
-    <main class="container mx-auto px-8 sm:px-10 pt-6 pb-10 max-w-2xl" id="main-container">
-        <div class="flex justify-between mb-8 sm:mb-12 items-center" id="top-bar">
-            <a href="index.html" class="back-link inline-flex items-center group">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-                </svg>
-                <span class="back-link-text">Back to Home</span>
-            </a>
-            <div class="theme-toggle-container flex rounded-md bg-gray-100 p-0.5">
-                <button id="top-light-mode-btn" class="theme-btn flex items-center justify-center rounded-md p-1 transition-all" aria-label="Light Mode">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-                    </svg>
-                </button>
-                <button id="top-dark-mode-btn" class="theme-btn flex items-center justify-center rounded-md p-1 transition-all" aria-label="Dark Mode">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-                    </svg>
-                </button>
-            </div>
-        </div>
-
+    <main class="container mx-auto px-8 sm:px-10 pt-10 sm:pt-16 pb-10 max-w-2xl" id="main-container">
         <div class="fade-in-content">
             <header class="mb-8">
-                <h1 class="text-2xl sm:text-3xl font-bold mb-4 text-left">
+                <h1 class="text-2xl sm:text-3xl font-bold mb-8 text-left">
                     <span class="lang-en">The Big Disconnect</span>
                 </h1>
-                <div class="blog-meta text-gray-500 mb-6 text-sm sm:text-base">
-                    <div class="lang-en">
-                        <time datetime="2026-09-09" class="inline">September 9, 2026</time>
-                        <span class="separator mx-2 inline">•</span>
-                        <span class="inline">11 min read</span>
-                    </div>
-                </div>
             </header>
 
             <article class="prose prose-lg max-w-none story">
@@ -465,46 +413,5 @@
         </div>
     </main>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const stickyNav = document.getElementById('sticky-nav');
-            const lightButtons = [
-                document.getElementById('light-mode-btn'),
-                document.getElementById('top-light-mode-btn')
-            ].filter(Boolean);
-            const darkButtons = [
-                document.getElementById('dark-mode-btn'),
-                document.getElementById('top-dark-mode-btn')
-            ].filter(Boolean);
-
-            const applyTheme = (theme) => {
-                const isDark = theme === 'dark';
-                document.body.classList.toggle('dark-mode', isDark);
-                document.body.classList.remove('code-mode');
-                document.documentElement.classList.toggle('dark-mode', isDark);
-                document.documentElement.classList.remove('code-mode');
-                localStorage.setItem('theme', isDark ? 'dark' : 'light');
-                lightButtons.forEach((btn) => btn.classList.toggle('active', !isDark));
-                darkButtons.forEach((btn) => btn.classList.toggle('active', isDark));
-            };
-
-            const saved = localStorage.getItem('theme');
-            applyTheme(saved === 'dark' ? 'dark' : 'light');
-
-            lightButtons.forEach((btn) => btn.addEventListener('click', function() {
-                applyTheme('light');
-            }));
-            darkButtons.forEach((btn) => btn.addEventListener('click', function() {
-                applyTheme('dark');
-            }));
-
-            window.addEventListener('scroll', function() {
-                const showSticky = window.scrollY > 100;
-                stickyNav.classList.toggle('visible', showSticky);
-                stickyNav.classList.toggle('opacity-100', showSticky);
-                stickyNav.classList.toggle('opacity-0', !showSticky);
-            });
-        });
-    </script>
 </body>
 </html>
