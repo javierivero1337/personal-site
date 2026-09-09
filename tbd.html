@@ -222,19 +222,20 @@
             font-size: 0.95rem;
         }
 
-        .story-license {
-            font-size: 0.8rem;
-            line-height: 1.6;
+        .scroll-echo {
+            min-height: 135vh;
+            display: grid;
+            place-items: center;
+            margin: 0;
+            padding: 0 1rem;
             color: #9ca3af;
+            font-size: 0.95rem;
+            letter-spacing: 0.02em;
+            text-align: center;
         }
 
-        .story-license a[href] {
-            color: #9ca3af;
-            text-decoration: underline;
-        }
-
-        body.dark-mode .story-license a[href] {
-            color: #9ca3af;
+        #scroll-echo-sentinel {
+            height: 1px;
         }
     </style>
 </head>
@@ -458,15 +459,27 @@
                     <p class="mb-4">And then scrolled some more.</p>
                 </section>
             </article>
+        </div>
 
-            <div class="mt-12 pt-8 border-t border-gray-100">
-                <p class="story-license">
-                    © 2026 Javier Rivero. This work is licensed under a
-                    <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener noreferrer">Creative Commons Attribution-NonCommercial 4.0 International License (CC BY-NC 4.0)</a>.
-                </p>
-            </div>
+        <div id="scroll-echoes" aria-hidden="true">
+            <div id="scroll-echo-sentinel"></div>
         </div>
     </main>
 
+    <script>
+        const echoes = document.getElementById('scroll-echoes');
+        const sentinel = document.getElementById('scroll-echo-sentinel');
+
+        const echoObserver = new IntersectionObserver(([entry]) => {
+            if (!entry.isIntersecting) return;
+
+            const echo = document.createElement('p');
+            echo.className = 'scroll-echo';
+            echo.textContent = 'And then scrolled some more.';
+            echoes.insertBefore(echo, sentinel);
+        });
+
+        echoObserver.observe(sentinel);
+    </script>
 </body>
 </html>
