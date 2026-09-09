@@ -62,15 +62,14 @@
         .story-sms {
             display: table;
             max-width: min(82%, 28rem);
-            margin: 1.35rem 0 1.35rem auto;
+            margin: 1.35rem 0;
             padding: 0.65rem 0.9rem;
-            color: #43385e;
-            background: linear-gradient(135deg, #f0eaff, #e6f0ff);
-            border: 1px solid rgba(124, 102, 176, 0.18);
-            border-radius: 1rem 1rem 0.25rem 1rem;
-            box-shadow: 0 6px 18px rgba(91, 70, 130, 0.08);
+            color: #374151;
+            background: #edf1f5;
+            border: 1px solid rgba(100, 116, 139, 0.12);
+            border-radius: 1rem 1rem 1rem 0.3rem;
+            box-shadow: 0 3px 10px rgba(55, 65, 81, 0.06);
             font-style: normal;
-            transform: rotate(-0.35deg);
         }
 
         span.story-sms {
@@ -78,36 +77,82 @@
             margin: 0 0.2rem 0.2rem 0;
         }
 
+        .story-sms--outgoing {
+            margin-left: auto;
+            color: #43385e;
+            background: #eee9fa;
+            border-color: rgba(124, 102, 176, 0.14);
+            border-radius: 1rem 1rem 0.3rem 1rem;
+        }
+
         html.dark-mode .story-sms,
         body.dark-mode .story-sms {
+            color: #e5e7eb;
+            background: #273343;
+            border-color: rgba(148, 163, 184, 0.16);
+        }
+
+        html.dark-mode .story-sms--outgoing,
+        body.dark-mode .story-sms--outgoing {
             color: #eee9ff;
-            background: linear-gradient(135deg, #392f52, #263855);
-            border-color: rgba(196, 181, 253, 0.2);
+            background: #392f52;
+            border-color: rgba(196, 181, 253, 0.18);
         }
 
         .story-notice {
             position: relative;
             margin: 1.5rem 0;
-            padding: 1rem 1.1rem 1rem 1.25rem;
+            padding: 0.85rem 1rem;
             overflow: hidden;
-            background:
-                linear-gradient(120deg, rgba(255, 255, 255, 0.84), rgba(255, 255, 255, 0.35)),
-                linear-gradient(135deg, #eef8ff, #f8efff);
-            border: 1px solid rgba(113, 98, 154, 0.14);
-            border-radius: 0.9rem;
-            box-shadow: 0 8px 22px rgba(55, 65, 81, 0.07);
+            background: #f8fafc;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.75rem;
+            box-shadow: 0 5px 16px rgba(55, 65, 81, 0.06);
             font-size: 0.95em;
             line-height: 1.55;
         }
 
-        .story-notice::before {
+        .story-notice--phone {
+            max-width: 94%;
+            margin-left: auto;
+            margin-right: auto;
+            background: linear-gradient(135deg, #f5f8fb, #faf7fc);
+            border-color: rgba(100, 116, 139, 0.14);
+            border-radius: 1rem;
+            box-shadow: 0 7px 20px rgba(55, 65, 81, 0.07);
+        }
+
+        .story-notice--phone .story-notice-app {
+            color: #64748b;
+        }
+
+        .story-notice--desktop {
+            max-width: 28rem;
+            margin-left: auto;
+            padding-top: 1rem;
+            border-radius: 0.5rem;
+            background: #f8fafc;
+            box-shadow: 0 8px 22px rgba(55, 65, 81, 0.09);
+        }
+
+        .story-notice--desktop::before {
             content: '';
             position: absolute;
             top: 0;
-            bottom: 0;
+            right: 0;
             left: 0;
-            width: 4px;
-            background: linear-gradient(#8b7cc7, #65a8c7);
+            height: 3px;
+            background: linear-gradient(90deg, #8aa5c2, #aaa1c8);
+        }
+
+        .story-notice--calendar {
+            max-width: 24rem;
+            padding-left: 1.1rem;
+            background: #fffaf2;
+            border-color: #eee3d0;
+            border-left: 4px solid #d7a85b;
+            border-radius: 0.45rem;
+            box-shadow: 0 5px 14px rgba(120, 86, 35, 0.06);
         }
 
         .story-board {
@@ -122,10 +167,20 @@
         html.dark-mode .story-notice,
         body.dark-mode .story-notice,
         body.dark-mode .story-board {
-            background:
-                linear-gradient(120deg, rgba(31, 41, 55, 0.9), rgba(31, 41, 55, 0.55)),
-                linear-gradient(135deg, #26374a, #3a2c47);
-            border-color: rgba(196, 181, 253, 0.16);
+            background: #1f2937;
+            border-color: #374151;
+        }
+
+        html.dark-mode .story-notice--phone,
+        body.dark-mode .story-notice--phone {
+            background: linear-gradient(135deg, #263343, #302b3b);
+        }
+
+        html.dark-mode .story-notice--calendar,
+        body.dark-mode .story-notice--calendar {
+            background: #302c25;
+            border-color: #514633;
+            border-left-color: #bd8e45;
         }
 
         html.dark-mode .story-board {
@@ -207,11 +262,11 @@
                     <p class="mb-4">What does that even mean? she wondered, careful not to let her face betray her confusion.</p>
                     <p class="mb-4">She didn't put much thought into it. She mindlessly scrolled Weavr as the manager spoke over Zoom, the tiny window of his face occupying one corner of her screen while the rest of it was filled with something far more interesting. It was obvious she was looking away, glued to the little screen below the meeting window, but nobody enforced cameras anymore. She disabled hers and kept scrolling.</p>
                     <p class="mb-4">A notification popped up on her phone.</p>
-                    <p class="story-sms mb-4">smoke break?</p>
+                    <p class="story-sms story-sms--incoming mb-4">smoke break?</p>
                     <p class="mb-4">Julian was the only human Lauren had been talking to regularly lately. Not because they were particularly close or lived in the same apartment building, but because he was one of the few people who still texted her without being prompted to.</p>
                     <p class="mb-4">She had become increasingly isolated after ending a seven-year relationship with her crypto-addicted, gambling partner.</p>
                     <p class="mb-4">“The only thing I took from him was how much gambling can destroy someone,” she would joke whenever the subject came up. Her friends had stopped reacting months ago. By now, the line was met with the same polite silence reserved for stories everyone had heard before.</p>
-                    <p class="mb-4"><span class="story-sms">down in 5</span> – Lauren replied.</p>
+                    <p class="mb-4"><span class="story-sms story-sms--outgoing">down in 5</span> – Lauren replied.</p>
                     <p class="mb-4">Lauren wasn't a smoker. She had always considered cigarettes an impressive way to spend money making yourself smell terrible, but she was more than happy to talk to Julian.</p>
                     <p class="mb-4">These days, this was the only human nudge she would get in her notification center anyway.</p>
                     <p class="mb-4">“So, did you hear they're opening a few cinemas again?” Julian asked.</p>
@@ -234,23 +289,23 @@
                     <p class="mb-4">Her first stop was her cellphone. She reached for the phone charging on the table outside her room. ChatGPT had confirmed that keeping your phone outside the bedroom helped with concentration, so technically, she was doing the right thing. Her first instinct was to snooze the alarm and unlock it.</p>
                     <p class="mb-4">Half asleep, she read through her notifications:</p>
 
-                    <aside class="story-notice">
+                    <aside class="story-notice story-notice--phone">
                         <p class="story-notice-app">[7:41 AM] SleepAura</p>
                         <p>You slept 4h 12m last night. Your weekly sleep debt has risen to 4hr 32min.</p>
                     </aside>
-                    <aside class="story-notice">
+                    <aside class="story-notice story-notice--phone">
                         <p class="story-notice-app">[7:42 AM] For You</p>
                         <p>We noticed you were looking for apartments outside the city. We found some options that will fit your budget!</p>
                     </aside>
-                    <aside class="story-notice">
+                    <aside class="story-notice story-notice--phone">
                         <p class="story-notice-app">[7:43 AM] Insights</p>
                         <p>You haven't spoken to Diego in the past 39 days. Would you like me to send a text on your behalf?</p>
                     </aside>
-                    <aside class="story-notice">
+                    <aside class="story-notice story-notice--phone">
                         <p class="story-notice-app">[7:45 AM] TurntableFM</p>
                         <p>We detected elevated stress for 2hr 13min yesterday. Here's a Relaxing Beats &amp; Mood Enhancing playlist made for you.</p>
                     </aside>
-                    <aside class="story-notice">
+                    <aside class="story-notice story-notice--phone">
                         <p class="story-notice-app">[7:46 AM] Shopping</p>
                         <p>Your morning breakfast: Special Sunshine Burrito from Tacolandia will be delivered in 21 minutes.</p>
                     </aside>
@@ -262,7 +317,7 @@
                     <p class="mb-4">By the time she finally looks up, 28 minutes have passed.</p>
                     <p class="mb-4">Her first meeting starts in two.</p>
                     <p class="mb-4">Her phone vibrates again.</p>
-                    <aside class="story-notice">
+                    <aside class="story-notice story-notice--phone">
                         <p class="story-notice-app">[Weavr]</p>
                         <p>Still watching?</p>
                     </aside>
@@ -272,12 +327,12 @@
                 <section class="mb-8">
                     <h2 class="text-xl sm:text-2xl font-bold mb-4">Chapter 3</h2>
                     <p class="mb-4">Lauren opened up her screen.</p>
-                    <aside class="story-notice">
+                    <aside class="story-notice story-notice--desktop">
                         <p>0 new support cases.</p>
                     </aside>
                     <p class="mb-4">For a moment, there was nothing to do. It was the perfect opportunity for a quick hit.</p>
                     <p class="mb-4">Her finger hovered over Weavr, but before she could open it, a notification appeared in the top-right corner of her screen.</p>
-                    <aside class="story-notice">
+                    <aside class="story-notice story-notice--desktop">
                         <p>🔔 Your productivity has decreased by 17% this week. Need some support? Click to read some tips!</p>
                     </aside>
                     <p class="mb-4">She dismissed it and opened Weavr anyway.</p>
@@ -287,7 +342,7 @@
                     <p class="mb-4">But every warning was met with another explanation. Brain fog. Migraines. Poor sleep. Stress. She had been under a lot of pressure lately. Anyone would be struggling. Anxiety was a real issue, especially for people who were actually trying to keep up with their work.</p>
                     <p class="mb-4">And besides, she was still getting things done. Just slower.</p>
                     <p class="mb-4">Until one morning, a 15-min Zoom call appeared on her calendar.</p>
-                    <aside class="story-notice">
+                    <aside class="story-notice story-notice--calendar">
                         <p>🔔 Daniel / Lauren — 10:00 AM</p>
                     </aside>
                     <p class="mb-4">She stared at it for a few seconds before joining, wondering if Daniel had just rescheduled their weekly 1:1.</p>
@@ -303,9 +358,9 @@
 
                 <section class="mb-8">
                     <h2 class="text-xl sm:text-2xl font-bold mb-4">Chapter 4</h2>
-                    <p class="story-sms mb-4">grabbing some ☕, wanna come?</p>
+                    <p class="story-sms story-sms--incoming mb-4">grabbing some ☕, wanna come?</p>
                     <p class="mb-4">Lauren instinctively swiped the notification away, then paused and opened it again.</p>
-                    <p class="story-sms mb-4">sure, be down in a sec.</p>
+                    <p class="story-sms story-sms--outgoing mb-4">sure, be down in a sec.</p>
                     <p class="mb-4">After Lauren finished talking, Julian tried to act surprised and empathetic, even though he knew this was only a matter of time. She hadn't really been herself for quite some time now.</p>
                     <p class="mb-4">Sometimes he wondered why he still kept talking to her. Habits, he thought, could be rooted in convenience too.</p>
                     <p class="mb-4">There was a small sense of guilt buried somewhere inside him. He vividly remembered those first few weeks when he had shown her all the new personalized apps, convincing her to download them so they could laugh about how absurdly specific they could get.</p>
@@ -392,7 +447,7 @@
                     <p class="mb-4">For the past months, she had barely thought about Weavr. It was one of the apps she stopped using on her first day back from the pod, and eventually she stopped thinking about it altogether.</p>
                     <p class="mb-4">At first, avoiding it had taken effort. Eventually, she simply stopped missing it.</p>
                     <p class="mb-4">As she walked past, the screen lit up.</p>
-                    <aside class="story-notice">
+                    <aside class="story-notice story-notice--phone">
                         <p class="story-notice-app">Weavr</p>
                         <p>We've missed you! Tap to see what we made while you were away.</p>
                     </aside>
