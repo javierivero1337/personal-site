@@ -11,6 +11,14 @@
     <link rel="stylesheet" href="styles.css">
     <script>
         (function () {
+            if ('scrollRestoration' in history) {
+                history.scrollRestoration = 'manual';
+            }
+
+            window.addEventListener('pageshow', function () {
+                window.scrollTo(0, 0);
+            });
+
             const saved = localStorage.getItem('theme') || 'light';
             if (saved === 'dark') {
                 document.documentElement.classList.add('dark-mode');
