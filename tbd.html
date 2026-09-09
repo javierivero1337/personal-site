@@ -15,9 +15,28 @@
                 history.scrollRestoration = 'manual';
             }
 
-            window.addEventListener('pageshow', function () {
-                window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
-            });
+            const resetToTop = function () {
+                const root = document.documentElement;
+                root.style.scrollBehavior = 'auto';
+
+                const snap = function () {
+                    window.scrollTo(0, 0);
+                    root.scrollTop = 0;
+                    if (document.body) document.body.scrollTop = 0;
+                };
+
+                snap();
+                requestAnimationFrame(function () {
+                    snap();
+                    setTimeout(function () {
+                        snap();
+                        root.style.scrollBehavior = '';
+                    }, 0);
+                });
+            };
+
+            window.addEventListener('pageshow', resetToTop);
+            window.addEventListener('load', resetToTop);
 
             const saved = localStorage.getItem('theme') || 'light';
             if (saved === 'dark') {
@@ -51,6 +70,11 @@
         }
 
         @media (max-width: 640px) {
+            #main-container {
+                padding-left: 1rem !important;
+                padding-right: 1rem !important;
+            }
+
             article.story {
                 font-size: 1rem;
                 line-height: 1.75;
