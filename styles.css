@@ -336,7 +336,8 @@ body.dark-mode .theme-btn.active {
 
 /* Light mode button active state */
 .theme-btn#light-mode-btn.active,
-.theme-btn#top-light-mode-btn.active {
+.theme-btn#top-light-mode-btn.active,
+.theme-btn#mobile-light-mode-btn.active {
   background-color: #fff;
   color: #f59e0b; /* Amber for sun icon */
 }

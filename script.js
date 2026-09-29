@@ -88,138 +88,61 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 300);
     }
 
-    // Theme toggle with segmented control
-    const lightModeBtn = document.getElementById('light-mode-btn');
-    const darkModeBtn = document.getElementById('dark-mode-btn');
-    const codeModeBtn = document.getElementById('code-mode-btn');
-    const themeButtons = [lightModeBtn, darkModeBtn, codeModeBtn];
-    
-    // Top theme toggle buttons
-    const topLightModeBtn = document.getElementById('top-light-mode-btn');
-    const topDarkModeBtn = document.getElementById('top-dark-mode-btn');
-    const topCodeModeBtn = document.getElementById('top-code-mode-btn');
-    const topThemeButtons = [topLightModeBtn, topDarkModeBtn, topCodeModeBtn];
-    
-    // Mobile menu theme toggle buttons
-    const mobileLightModeBtn = document.getElementById('mobile-light-mode-btn');
-    const mobileDarkModeBtn = document.getElementById('mobile-dark-mode-btn');
-    const mobileCodeModeBtn = document.getElementById('mobile-code-mode-btn');
-    const mobileThemeButtons = mobileLightModeBtn && mobileDarkModeBtn && mobileCodeModeBtn
-        ? [mobileLightModeBtn, mobileDarkModeBtn, mobileCodeModeBtn]
-        : [];
-    
-    if (lightModeBtn && darkModeBtn && codeModeBtn && topLightModeBtn && topDarkModeBtn && topCodeModeBtn) {
-        
-        // Function to update active button
+    // Theme toggle: sun (light) and code view
+    const lightButtons = [
+        document.getElementById('light-mode-btn'),
+        document.getElementById('top-light-mode-btn'),
+        document.getElementById('mobile-light-mode-btn')
+    ].filter(Boolean);
+    const codeButtons = [
+        document.getElementById('code-mode-btn'),
+        document.getElementById('top-code-mode-btn'),
+        document.getElementById('mobile-code-mode-btn')
+    ].filter(Boolean);
+
+    if (lightButtons.length && codeButtons.length) {
         const setActiveThemeButton = (theme) => {
-            // Clear all active states
-            themeButtons.forEach(btn => {
-                if (btn) btn.classList.remove('active');
-            });
-            topThemeButtons.forEach(btn => {
-                if (btn) btn.classList.remove('active');
-            });
-            mobileThemeButtons.forEach(btn => {
-                if (btn) btn.classList.remove('active');
-            });
-            
-            // Set active state based on theme
-            if (theme === 'light') {
-                lightModeBtn.classList.add('active');
-                topLightModeBtn.classList.add('active');
-                if (mobileLightModeBtn) mobileLightModeBtn.classList.add('active');
-            } else if (theme === 'dark') {
-                darkModeBtn.classList.add('active');
-                topDarkModeBtn.classList.add('active');
-                if (mobileDarkModeBtn) mobileDarkModeBtn.classList.add('active');
-            } else if (theme === 'code') {
-                codeModeBtn.classList.add('active');
-                topCodeModeBtn.classList.add('active');
-                if (mobileCodeModeBtn) mobileCodeModeBtn.classList.add('active');
-            }
+            [...lightButtons, ...codeButtons].forEach(btn => btn.classList.remove('active'));
+            const activeButtons = theme === 'code' ? codeButtons : lightButtons;
+            activeButtons.forEach(btn => btn.classList.add('active'));
         };
 
-        // Function to apply theme
         const applyTheme = (theme) => {
             const profilePic = document.getElementById('profile-pic');
-            if (theme === 'dark') {
-                document.body.classList.add('dark-mode');
-                document.body.classList.remove('code-mode');
-                document.documentElement.classList.remove('code-mode');
-                if (profilePic) profilePic.src = 'img/profile.jpeg';
-                setActiveThemeButton('dark');
-            } else if (theme === 'code') {
-                document.body.classList.remove('dark-mode');
-                document.body.classList.add('code-mode');
-                document.documentElement.classList.add('code-mode');
-                if (profilePic) profilePic.src = 'img/profile-code.png';
-                setActiveThemeButton('code');
-            } else {
-                document.body.classList.remove('dark-mode');
-                document.body.classList.remove('code-mode');
-                document.documentElement.classList.remove('code-mode');
-                if (profilePic) profilePic.src = 'img/profile.jpeg';
-                setActiveThemeButton('light');
+            const useCode = theme === 'code';
+
+            document.body.classList.remove('dark-mode');
+            document.documentElement.classList.remove('dark-mode');
+            document.body.classList.toggle('code-mode', useCode);
+            document.documentElement.classList.toggle('code-mode', useCode);
+
+            if (profilePic) {
+                profilePic.src = useCode ? 'img/profile-code.png' : 'img/profile.jpeg';
             }
+
+            setActiveThemeButton(useCode ? 'code' : 'light');
         };
 
-        // Check for saved theme preference or use light theme as default
-        const savedTheme = localStorage.getItem('theme') || 'light';
+        let savedTheme = localStorage.getItem('theme');
+        if (savedTheme !== 'code') {
+            savedTheme = 'light';
+            localStorage.setItem('theme', 'light');
+        }
         applyTheme(savedTheme);
 
-        // Add event listeners for sticky nav theme buttons
-        lightModeBtn.addEventListener('click', function() {
-            localStorage.setItem('theme', 'light');
-            applyTheme('light');
-        });
-
-        darkModeBtn.addEventListener('click', function() {
-            localStorage.setItem('theme', 'dark');
-            applyTheme('dark');
-        });
-
-        codeModeBtn.addEventListener('click', function() {
-            localStorage.setItem('theme', 'code');
-            applyTheme('code');
-        });
-        
-        // Add event listeners for top theme buttons
-        topLightModeBtn.addEventListener('click', function() {
-            localStorage.setItem('theme', 'light');
-            applyTheme('light');
-        });
-
-        topDarkModeBtn.addEventListener('click', function() {
-            localStorage.setItem('theme', 'dark');
-            applyTheme('dark');
-        });
-
-        topCodeModeBtn.addEventListener('click', function() {
-            localStorage.setItem('theme', 'code');
-            applyTheme('code');
-        });
-        
-        // Add event listeners for mobile menu theme buttons
-        if (mobileLightModeBtn) {
-            mobileLightModeBtn.addEventListener('click', function() {
+        lightButtons.forEach(btn => {
+            btn.addEventListener('click', function() {
                 localStorage.setItem('theme', 'light');
                 applyTheme('light');
             });
-        }
-        
-        if (mobileDarkModeBtn) {
-            mobileDarkModeBtn.addEventListener('click', function() {
-                localStorage.setItem('theme', 'dark');
-                applyTheme('dark');
-            });
-        }
+        });
 
-        if (mobileCodeModeBtn) {
-            mobileCodeModeBtn.addEventListener('click', function() {
+        codeButtons.forEach(btn => {
+            btn.addEventListener('click', function() {
                 localStorage.setItem('theme', 'code');
                 applyTheme('code');
             });
-        }
+        });
     }
 
     // Show More functionality with smooth transition

@@ -39,9 +39,7 @@
             window.addEventListener('load', resetToTop);
 
             const saved = localStorage.getItem('theme') || 'light';
-            if (saved === 'dark') {
-                document.documentElement.classList.add('dark-mode');
-            } else if (saved === 'code') {
+            if (saved === 'code') {
                 document.documentElement.classList.add('code-mode');
             }
         })();
