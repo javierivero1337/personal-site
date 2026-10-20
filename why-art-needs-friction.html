@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="img/favicon.png" type="image/png">
+    <title>Why Art Needs Friction - Javier Rivero</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+    <style>
+        @keyframes smoothFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-content {
+            opacity: 0;
+            animation: smoothFadeIn 0.8s ease-out forwards;
+            animation-delay: 0.2s;
+        }
+
+        .back-link {
+            transition: all 0.2s ease;
+        }
+
+        .back-link-text {
+            position: relative;
+        }
+
+        .back-link-text::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: 0;
+            left: 0;
+            background-color: currentColor;
+            transition: width 0.3s ease;
+        }
+
+        .back-link:hover .back-link-text::after {
+            width: 100%;
+        }
+
+        .back-link:hover .back-link-text {
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-800">
+    <nav id="sticky-nav" class="fixed top-0 left-0 w-full z-50 bg-white shadow-sm opacity-0 transition-opacity duration-300">
+        <div class="container mx-auto px-4 py-3 max-w-2xl flex justify-between items-center">
+            <a href="index.html" class="back-link inline-flex items-center group">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+                <span class="back-link-text">Back to Home</span>
+            </a>
+            <div class="theme-toggle-container flex rounded-md bg-gray-100 p-0.5">
+                <button id="light-mode-btn" class="theme-btn flex items-center justify-center rounded-md p-1 transition-all" aria-label="Light Mode">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                    </svg>
+                </button>
+                <button id="code-mode-btn" class="theme-btn theme-code-btn flex items-center justify-center rounded-md p-1 transition-all" aria-label="Code view">
+                    <span>&lt;/&gt;</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mx-auto px-8 sm:px-10 pt-6 pb-10 max-w-2xl" id="main-container">
+        <div class="flex justify-between mb-8 sm:mb-12 items-center" id="top-bar">
+            <a href="index.html" class="back-link inline-flex items-center group">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+                <span class="back-link-text">Back to Home</span>
+            </a>
+            <div class="theme-toggle-container flex rounded-md bg-gray-100 p-0.5">
+                <button id="top-light-mode-btn" class="theme-btn flex items-center justify-center rounded-md p-1 transition-all" aria-label="Light Mode">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                    </svg>
+                </button>
+                <button id="top-code-mode-btn" class="theme-btn theme-code-btn flex items-center justify-center rounded-md p-1 transition-all" aria-label="Code view">
+                    <span>&lt;/&gt;</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="fade-in-content">
+            <header class="mb-8">
+                <h1 class="text-2xl sm:text-3xl font-bold mb-4 text-left">
+                    <span class="lang-en">Why Art Needs Friction</span>
+                </h1>
+                <div class="blog-meta text-gray-500 mb-6 text-sm sm:text-base">
+                    <div class="lang-en">
+                        <time datetime="2026-10-20" class="inline">October 20, 2026</time>
+                        <span class="separator mx-2 inline">•</span>
+                        <span class="inline">3 min read</span>
+                    </div>
+                </div>
+            </header>
+
+            <article class="prose prose-lg max-w-none">
+                <section class="mb-8">
+                    <div class="lang-en">
+                        <p class="mb-4">When was the last time you watched a movie without picking up your phone?</p>
+                        <p class="mb-4">I often think about the infinite entertainment options we have today: choosing the next song to play, what movie to watch, or the next cool thing to read, only to half-heartedly experience them.</p>
+                        <p class="mb-4">When you have endless access to a never-ending catalog, nothing feels scarce. We discard a piece of art in 1.2 seconds just to scroll on to the next thing. If the first ten seconds of a song don’t pick up, we hastily scrub to the middle of the track, acting as if someone is timing us to make a decision.</p>
+                        <p class="mb-4">When you spin a vinyl record, you’re forced to sit and listen to the whole thing. Turntables don’t have a skip button, nor do they let you effortlessly jump back and forth. They introduce physical friction, forcing you to experience the work just as the artist intended.</p>
+                        <p class="mb-4">Because we’ve engineered all the friction out of our lives, some people will never experience an album in full. I literally find myself warning friends, “Don’t skip the tracks, just let it play.” Which is absurd when you think about it. When was the last time you had to tell someone not to skip chapters in a book?</p>
+                        <p class="mb-4">Recently, I caught this same desperation creeping into my own reading habits. Feeling that urge to “skip ahead” on a physical page was alarming. Selection is effortless now, so commitment has become rare. How do we fight the urge to mindlessly jump to the next thing?</p>
+                        <p class="mb-4">It is only when we surrender to a piece of art in full that we actually understand it. That is where art elicits something that can’t be put into words. We feel alive again. We get goosebumps. We smile without noticing, and we carry it with us all day.</p>
+                        <p class="mb-4">This is exactly how art should be experienced.</p>
+                        <p class="mb-4">Listen, I joke about being mindful, but now I’m wondering: should we really have to force ourselves to pay attention? Or should the art be strong enough to pull us in and absorb us?</p>
+                        <p class="mb-4">The truth is, it takes both.</p>
+                        <p class="mb-4">Art shouldn’t be commoditized because making art is hard, and it should be hard. Art is the translation of human emotion, and that translation requires friction. Simultaneously, the audience has a responsibility to bring their attention, to treat the work as something scarce and worthy of time.</p>
+                        <p class="mb-4">The commoditization of art through AI is now an increasing problem because of it being used to skip the process altogether. Art should be the process, not the output. When creators use AI to skip the entire friction of making and consumers use algorithms to skip the friction of experiencing, we are left with endless garbage and zero meaning, lost in a domain that was already hard enough to navigate.</p>
+                        <p class="mb-4">Maybe the only way to protect our humanity is to deliberately put the friction back in.</p>
+                    </div>
+                </section>
+            </article>
+
+            <div class="mt-12 pt-8 border-t border-gray-100">
+                <h3 class="text-sm text-gray-400 mb-4">Similar entries</h3>
+                <div class="flex flex-col space-y-3">
+                    <a href="analog-nostalgia.html" class="group inline-flex items-center gap-1 text-gray-600 hover:text-blue-600 transition-colors">
+                        Analog nostalgia
+                        <span class="text-blue-600 opacity-0 group-hover:opacity-100 transition-opacity transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
+                    </a>
+                    <a href="shouldiuseai.html" class="group inline-flex items-center gap-1 text-gray-600 hover:text-blue-600 transition-colors">
+                        Should I Use AI?
+                        <span class="text-blue-600 opacity-0 group-hover:opacity-100 transition-opacity transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const stickyNav = document.getElementById('sticky-nav');
+
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 100) {
+                    stickyNav.classList.add('opacity-100');
+                    stickyNav.classList.remove('opacity-0');
+                } else {
+                    stickyNav.classList.remove('opacity-100');
+                    stickyNav.classList.add('opacity-0');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
